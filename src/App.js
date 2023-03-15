@@ -1,5 +1,8 @@
 import './App.css';
+
 import MainGame from './Components/MainGame/MainGame';
+import EndScreen from './Components/EndScreen/EndScreen';
+
 
 import React from 'react';
 
@@ -21,6 +24,8 @@ const App = () => {
   const [time, setTime] = React.useState(0);
   const [timerOn, setTimerOn] = React.useState(true);
 
+  const [isEnd, setIsEnd] = React.useState(false);
+
 
   const checkIsCorrect = (clickedShape) => {
     if (clickedShape === previousShape) console.log("correct");
@@ -28,6 +33,12 @@ const App = () => {
   }
 
   const updateGameState = (clickedShape) => {
+    if (currentRound >= 10) {
+      // end screen
+      setIsEnd(true);
+      console.log("end")
+    }
+
     checkIsCorrect(clickedShape);
     setCurrentRound(prevRound => prevRound + 1)
     let newShape = getRndInteger(0, 3);
@@ -44,7 +55,16 @@ const App = () => {
 
   return (
     <div className="App">
-      < MainGame shape={shape} currentRound={currentRound} updateGameState={updateGameState} time={time} setTime={setTime} timerOn={timerOn} setTimerOn={setTimerOn}/>
+      {!isEnd &&
+        < MainGame
+          shape={shape}
+          currentRound={currentRound}
+          updateGameState={updateGameState}
+          time={time} setTime={setTime}
+          timerOn={timerOn}
+          setTimerOn={setTimerOn} />
+      }
+      {isEnd && < EndScreen />}
     </div>
   );
 }
