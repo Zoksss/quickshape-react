@@ -1,4 +1,4 @@
-import './EndScreen.css';
+import './EndScreen.scss';
 import React from 'react';
 
 

@@ -1,5 +1,6 @@
 import './App.css';
 
+import HomeScreen from './Components/HomeScreen/HomeScreen';
 import MainGame from './Components/MainGame/MainGame';
 import EndScreen from './Components/EndScreen/EndScreen';
 
@@ -19,18 +20,41 @@ let previousShape = -1;
 
 const App = () => {
   const [shape, setShape] = React.useState("");
-  const [currentRound, setCurrentRound] = React.useState(0);
+  const [currentRound, setCurrentRound] = React.useState(-1);
 
   const [time, setTime] = React.useState(0);
-  const [timerOn, setTimerOn] = React.useState(true);
+  const [timerOn, setTimerOn] = React.useState(false);
+  const [isCountdown, setIsCountdown] = React.useState(false);
 
   const [isEnd, setIsEnd] = React.useState(false);
+  const [isHome, setIsHome] = React.useState(true);
+
+
+  const [counter, setCounter] = React.useState(4);
 
 
   const checkIsCorrect = (clickedShape) => {
     if (clickedShape === previousShape) console.log("correct");
     else console.log("wrong");
   }
+
+  const startGame = () => {
+    updateGameState();
+    setIsHome(false);    
+    setCounter(3)
+    setIsCountdown(true);
+  }
+
+  React.useEffect(() => {
+    if (counter <= 3) {
+      counter > 0 && setTimeout(() => setCounter(counter - 1), 800);
+      if(counter === 0){
+        setIsCountdown(false);
+        setTimerOn(true);
+        setCounter(4);
+      }
+    }
+  }, [counter]);
 
   const updateGameState = (clickedShape) => {
     if (currentRound >= 10) {
@@ -51,18 +75,25 @@ const App = () => {
       previousShape = newShape;
       setShape(newShape);
     }
+
+    setTime(0);
+    // push time in array here
   }
 
   return (
     <div className="App">
-      {!isEnd &&
+      {isHome && < HomeScreen startGame={startGame} />}
+      {!isEnd && !isHome &&
         < MainGame
           shape={shape}
           currentRound={currentRound}
           updateGameState={updateGameState}
           time={time} setTime={setTime}
           timerOn={timerOn}
-          setTimerOn={setTimerOn} />
+          setTimerOn={setTimerOn}
+          counter={counter}
+          isCountdown={isCountdown}
+        />
       }
       {isEnd && < EndScreen />}
     </div>
@@ -70,3 +101,21 @@ const App = () => {
 }
 
 export default App;
+
+
+/*
+< HomeScreen startGame={startGame}/>
+
+{!isEnd &&
+  < MainGame
+    shape={shape}
+    currentRound={currentRound}
+    updateGameState={updateGameState}
+    time={time} setTime={setTime}
+    timerOn={timerOn}
+    setTimerOn={setTimerOn} />
+}
+{isEnd && < EndScreen />}
+
+
+*/
