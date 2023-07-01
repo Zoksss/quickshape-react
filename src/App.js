@@ -12,6 +12,8 @@ const getRndInteger = (min, max) => {  // both included
 }
 
 let previousShape = -1;
+let tempTimeArray = [];
+
 
 // 0 - pentagon
 // 1 - circle
@@ -24,10 +26,13 @@ const App = () => {
 
   const [time, setTime] = React.useState(0);
   const [timerOn, setTimerOn] = React.useState(false);
+  const [timeAvg, setTimeAvg] = React.useState(999999);
+
   const [isCountdown, setIsCountdown] = React.useState(false);
 
   const [isEnd, setIsEnd] = React.useState(false);
   const [isHome, setIsHome] = React.useState(true);
+
 
 
   const [counter, setCounter] = React.useState(4);
@@ -40,7 +45,7 @@ const App = () => {
 
   const startGame = () => {
     updateGameState();
-    setIsHome(false);    
+    setIsHome(false);
     setCounter(3)
     setIsCountdown(true);
   }
@@ -48,7 +53,7 @@ const App = () => {
   React.useEffect(() => {
     if (counter <= 3) {
       counter > 0 && setTimeout(() => setCounter(counter - 1), 800);
-      if(counter === 0){
+      if (counter === 0) {
         setIsCountdown(false);
         setTimerOn(true);
         setCounter(4);
@@ -56,11 +61,19 @@ const App = () => {
     }
   }, [counter]);
 
+
   const updateGameState = (clickedShape) => {
     if (currentRound >= 10) {
       // end screen
       setIsEnd(true);
-      console.log("end")
+      console.log(tempTimeArray);
+      let x = 0;
+      for(let i = 0; i < tempTimeArray.length; i++){
+        x +=  tempTimeArray[i];
+      }
+      x = x/10;
+      setTimeAvg(x);
+      tempTimeArray = [];
     }
 
     checkIsCorrect(clickedShape);
@@ -76,6 +89,10 @@ const App = () => {
       setShape(newShape);
     }
 
+
+    if (currentRound > 0) {
+      tempTimeArray.push(time);
+    }
     setTime(0);
     // push time in array here
   }
@@ -95,7 +112,7 @@ const App = () => {
           isCountdown={isCountdown}
         />
       }
-      {isEnd && < EndScreen />}
+      {isEnd && < EndScreen timeAvg={timeAvg}/>}
     </div>
   );
 }

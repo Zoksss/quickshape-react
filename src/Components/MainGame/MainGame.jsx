@@ -29,7 +29,7 @@ const MainGame = (props) => {
     return (
         <div className="main-game-container">
             {props.isCountdown && <div className="main-game-countdown">
-                <p className="shake">{props.counter}</p>
+                <p className={props.counter==3||props.counter==1? "shake": "shake2"}>{props.counter}</p>
             </div> }
             <div className="main-game-top-row">
                 <div className="time-counter"><p>{Math.floor((props.time/1000)%60).toString().slice(-2)}.{((props.time/10)%100).toString().slice(-2)}</p></div>

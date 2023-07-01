@@ -118,7 +118,32 @@
     }
 }
 
+
+
+
+
+
 @keyframes shake {
+    0% {
+        transform: translate(-52%, -28%) rotate(0deg);
+    }
+    20% {
+        transform: translate(-50%, -27%) rotate(-2deg);
+    }
+    40% {
+        transform: translate(-51%, -26%) rotate(1deg);
+    }
+    60% {
+        transform: translate(-53%, -27%) rotate(0deg);
+    }
+    80% {
+        transform: translate(-52%, -28%) rotate(2deg);
+    }
+    100% {
+        transform: translate(-50%, -27%) rotate(-3deg);
+    }
+}
+@keyframes shake2 {
     0% {
         transform: translate(-52%, -28%) rotate(0deg);
     }
@@ -142,3 +167,13 @@
 .shake {
     animation: shake 500ms linear;
 }
+
+.shake2 {
+    animation: shake2 500ms ease;
+}
+
+
+
+
+
+
