@@ -22,11 +22,11 @@ const HomeScreen = (props) => {
                 <div className="top-row2">
                     <div className="coins">
                         <img src={Coin} alt="coin" />
-                        <p>255</p>
+                        <p>{props.coins}</p>
                     </div>
                     <div className="gems">
                         <img src={Gem} alt="gem" />
-                        <p>9</p>
+                        <p>{props.gems}</p>
                     </div>
                 </div>
             </div>
