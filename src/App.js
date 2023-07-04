@@ -3,9 +3,9 @@ import './App.css';
 import HomeScreen from './Components/HomeScreen/HomeScreen';
 import MainGame from './Components/MainGame/MainGame';
 import EndScreen from './Components/EndScreen/EndScreen';
+import ShopScreen from './Components/ShopScreen/ShopScreen';
 
-
-import React, { useState } from 'react';
+import React from 'react';
 
 const getRndInteger = (min, max) => {  // both included
   return Math.floor(Math.random() * (max - min + 1)) + min;
@@ -14,11 +14,6 @@ const getRndInteger = (min, max) => {  // both included
 let previousShape = -1;
 let tempTimeArray = [];
 
-
-// 0 - pentagon
-// 1 - circle
-// 2 - triangle
-// 3 - square
 
 const App = () => {
   const [shape, setShape] = React.useState("");
@@ -36,13 +31,11 @@ const App = () => {
   const [isEnd, setIsEnd] = React.useState(false);
   const [isHome, setIsHome] = React.useState(true);
 
-
-
-
   const [coins, setCoins] = React.useState(0);
   const [gems, setGems] = React.useState(0);
 
-
+  const [coinsToAdd, setCoinsToAdd] = React.useState(0);
+  const [gemsToAdd, setGemsToAdd] = React.useState(0);
 
   const [counter, setCounter] = React.useState(4);
 
@@ -131,35 +124,53 @@ const App = () => {
 
   const calculateCoinsAndGems = () => {
     if (!isNaN(timeAvg)) {
-      if (timeAvg >= 0 && timeAvg <= 0.10) {
+      if (timeAvg >= 0 && timeAvg <= 100) {
         setCoins(coins + 83);
         setGems(gems + 3)
+        setCoinsToAdd(83)
+        setGemsToAdd(3)
       }
-      else if (timeAvg > 0.1 && timeAvg <= 0.14) {
+      else if (timeAvg > 100 && timeAvg <= 140) {
         setCoins(coins + 61);
         setGems(gems + 2)
+        setCoinsToAdd(61)
+        setGemsToAdd(2)
       }
-      else if (timeAvg > 0.14 && timeAvg <= 0.19) {
+      else if (timeAvg > 140 && timeAvg <= 190) {
         setCoins(coins + 30);
-        setGems(gems + 0)
+        setCoinsToAdd(30)
+        setGemsToAdd(0)
       }
-      else if (timeAvg > 0.19 && timeAvg <= 0.22) {
+      else if (timeAvg > 190 && timeAvg <= 220) {
         setCoins(coins + 21);
+        setCoinsToAdd(21);
+        setGemsToAdd(0)
+
       }
-      else if (timeAvg > 0.22 && timeAvg <= 0.24) {
+      else if (timeAvg > 220 && timeAvg <= 240) {
         setCoins(coins + 17);
+        setCoinsToAdd(17)
+        setGemsToAdd(0)
       }
-      else if (timeAvg > 0.24 && timeAvg <= 0.26) {
+      else if (timeAvg > 240 && timeAvg <= 260) {
         setCoins(coins + 11);
+        setCoinsToAdd(11)
+        setGemsToAdd(0)
       }
-      else if (timeAvg > 0.26 && timeAvg <= 0.30) {
+      else if (timeAvg > 260 && timeAvg <= 300) {
         setCoins(coins + 8);
+        setCoinsToAdd(8)
+        setGemsToAdd(0)
       }
-      else if (timeAvg > 0.3 && timeAvg <= 0.42) {
+      else if (timeAvg > 300 && timeAvg <= 420) {
         setCoins(coins + 4);
+        setCoinsToAdd(4)
+        setGemsToAdd(0)
       }
       else {
         setCoins(coins + 2);
+        setCoinsToAdd(2)
+        setGemsToAdd(0)
       }
     }
     console.log(coins)
@@ -167,7 +178,7 @@ const App = () => {
 
   return (
     <div className="App">
-      {isHome && < HomeScreen startGame={startGame} coins={coins} gems={gems}/>}
+      {isHome && < HomeScreen startGame={startGame} coins={coins} gems={gems} />}
       {!isEnd && !isHome &&
         < MainGame
           shape={shape}
@@ -180,27 +191,10 @@ const App = () => {
           isCountdown={isCountdown}
         />
       }
-      {isEnd && < EndScreen timeAvg={timeAvg} bestAvg={bestAvg} isBestTime={isBestTime} startGame={startGame} setIsHome={setIsHome} setIsEnd={setIsEnd} setCoins={setCoins} setGems={setGems} coins={coins} gems={gems} />}
+      {isEnd && < EndScreen timeAvg={timeAvg} bestAvg={bestAvg} isBestTime={isBestTime} startGame={startGame} setIsHome={setIsHome} setIsEnd={setIsEnd} setCoins={setCoins} setGems={setGems} coins={coins} gems={gems} coinsToAdd={coinsToAdd} gemsToAdd={gemsToAdd} />}
+      
     </div>
   );
 }
 
 export default App;
-
-
-/*
-< HomeScreen startGame={startGame}/>
-
-{!isEnd &&
-  < MainGame
-    shape={shape}
-    currentRound={currentRound}
-    updateGameState={updateGameState}
-    time={time} setTime={setTime}
-    timerOn={timerOn}
-    setTimerOn={setTimerOn} />
-}
-{isEnd && < EndScreen />}
-
-
-*/

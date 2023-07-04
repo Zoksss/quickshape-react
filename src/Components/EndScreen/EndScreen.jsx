@@ -19,11 +19,11 @@ const EndScreen = (props) => {
             <div className="underline"></div>
             <div className="coins">
                 <img className="coin-icon" src={Coin} alt="" />
-                <p className="coin-value" id="endScreenCoins">+10</p>
+                <p className="coin-value" id="endScreenCoins">+{props.coinsToAdd}</p>
             </div>
             <div className="gems">
                 <img className="gems-icon" src={Gem} alt="" />
-                <p className="gem-value" id="endScreenGems">+1</p>
+                <p className="gem-value" id="endScreenGems">+{props.gemsToAdd}</p>
             </div>
             <div className="underline"></div>
             <div className="end-screen-buttons">
