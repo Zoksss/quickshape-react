@@ -1,11 +1,12 @@
 import './App.css';
-
 import HomeScreen from './Components/HomeScreen/HomeScreen';
 import MainGame from './Components/MainGame/MainGame';
 import EndScreen from './Components/EndScreen/EndScreen';
 import ShopScreen from './Components/ShopScreen/ShopScreen';
 
 import React from 'react';
+
+const themes = require('./Components/themes')
 
 const getRndInteger = (min, max) => {  // both included
   return Math.floor(Math.random() * (max - min + 1)) + min;
@@ -173,12 +174,16 @@ const App = () => {
         setGemsToAdd(0)
       }
     }
-    console.log(coins)
+  }
+
+
+  const buyTheme = (themeName) => {
+    console.log(themeName)
   }
 
   return (
     <div className="App">
-      {isHome && < HomeScreen startGame={startGame} coins={coins} gems={gems} />}
+      {isHome && < HomeScreen startGame={startGame} coins={coins} gems={gems} buyTheme={buyTheme}/>}
       {!isEnd && !isHome &&
         < MainGame
           shape={shape}
