@@ -2,11 +2,14 @@ import './App.css';
 import HomeScreen from './Components/HomeScreen/HomeScreen';
 import MainGame from './Components/MainGame/MainGame';
 import EndScreen from './Components/EndScreen/EndScreen';
-import ShopScreen from './Components/ShopScreen/ShopScreen';
 
 import React from 'react';
 
-const themes = require('./Components/themes')
+import calculateCoinsAndGems from "./Components/utilities/calculateCoinsAndGems.js"
+
+
+import themesData from  "../src/Components/utilities/themeData.js";
+import  buyTheme from "./Components/utilities/buyTheme.js";
 
 const getRndInteger = (min, max) => {  // both included
   return Math.floor(Math.random() * (max - min + 1)) + min;
@@ -41,9 +44,19 @@ const App = () => {
   const [counter, setCounter] = React.useState(4);
 
 
+  const [unlockedThemes, setUnlockedThemes] = React.useState(["Basic"]);
+  const [currentTheme, setCurrentTheme] = React.useState({});
+
+
   const checkIsCorrect = (clickedShape) => {
     if (clickedShape === previousShape) console.log("correct");
     else console.log("wrong");
+  }
+
+  const setTheme = (themeName) => {
+    let themeObj = themesData.find(o => o.themeName === themeName);
+    if(themeObj) setCurrentTheme(themeObj.object);
+    console.log(currentTheme);
   }
 
   const startGame = () => {
@@ -99,7 +112,7 @@ const App = () => {
         setIsBestTime(true);
       }
       else setIsBestTime(false);
-      calculateCoinsAndGems();
+      calclulateStats();
 
       tempTimeArray = [];
     }
@@ -123,67 +136,23 @@ const App = () => {
     setTime(0);
   }
 
-  const calculateCoinsAndGems = () => {
-    if (!isNaN(timeAvg)) {
-      if (timeAvg >= 0 && timeAvg <= 100) {
-        setCoins(coins + 83);
-        setGems(gems + 3)
-        setCoinsToAdd(83)
-        setGemsToAdd(3)
-      }
-      else if (timeAvg > 100 && timeAvg <= 140) {
-        setCoins(coins + 61);
-        setGems(gems + 2)
-        setCoinsToAdd(61)
-        setGemsToAdd(2)
-      }
-      else if (timeAvg > 140 && timeAvg <= 190) {
-        setCoins(coins + 30);
-        setCoinsToAdd(30)
-        setGemsToAdd(0)
-      }
-      else if (timeAvg > 190 && timeAvg <= 220) {
-        setCoins(coins + 21);
-        setCoinsToAdd(21);
-        setGemsToAdd(0)
-
-      }
-      else if (timeAvg > 220 && timeAvg <= 240) {
-        setCoins(coins + 17);
-        setCoinsToAdd(17)
-        setGemsToAdd(0)
-      }
-      else if (timeAvg > 240 && timeAvg <= 260) {
-        setCoins(coins + 11);
-        setCoinsToAdd(11)
-        setGemsToAdd(0)
-      }
-      else if (timeAvg > 260 && timeAvg <= 300) {
-        setCoins(coins + 8);
-        setCoinsToAdd(8)
-        setGemsToAdd(0)
-      }
-      else if (timeAvg > 300 && timeAvg <= 420) {
-        setCoins(coins + 4);
-        setCoinsToAdd(4)
-        setGemsToAdd(0)
-      }
-      else {
-        setCoins(coins + 2);
-        setCoinsToAdd(2)
-        setGemsToAdd(0)
-      }
-    }
+  const calclulateStats = () => {
+    let stats = calculateCoinsAndGems(timeAvg);
+    setCoins(coins + stats[0]);
+    setGems(gems + stats[1])
+    setCoinsToAdd(stats[0]);
+    setGemsToAdd(stats[1]);
   }
 
-
-  const buyTheme = (themeName) => {
+  const buyThemeTemp = (themeName) => {
     console.log(themeName)
+    console.log(buyTheme(themeName, coins, gems, unlockedThemes)); 
+    setTheme("Dark");
   }
 
   return (
     <div className="App">
-      {isHome && < HomeScreen startGame={startGame} coins={coins} gems={gems} buyTheme={buyTheme}/>}
+      {isHome && < HomeScreen startGame={startGame} coins={coins} gems={gems} buyTheme={buyThemeTemp}  currentTheme={currentTheme}/>}
       {!isEnd && !isHome &&
         < MainGame
           shape={shape}
@@ -194,10 +163,11 @@ const App = () => {
           setTimerOn={setTimerOn}
           counter={counter}
           isCountdown={isCountdown}
+          currentTheme={currentTheme}
         />
       }
-      {isEnd && < EndScreen timeAvg={timeAvg} bestAvg={bestAvg} isBestTime={isBestTime} startGame={startGame} setIsHome={setIsHome} setIsEnd={setIsEnd} setCoins={setCoins} setGems={setGems} coins={coins} gems={gems} coinsToAdd={coinsToAdd} gemsToAdd={gemsToAdd} />}
-      
+      {isEnd && < EndScreen timeAvg={timeAvg} bestAvg={bestAvg} isBestTime={isBestTime} startGame={startGame} setIsHome={setIsHome} setIsEnd={setIsEnd} setCoins={setCoins} setGems={setGems} coins={coins} gems={gems} coinsToAdd={coinsToAdd} gemsToAdd={gemsToAdd} currentTheme={currentTheme}/>}
+
     </div>
   );
 }

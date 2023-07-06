@@ -1,6 +1,6 @@
 .home-screen-container {
     position: relative;
-    background-color: rgb(71, 72, 74);
+    //background-color: rgb(71, 72, 74);
     max-width: 450px;
     width: 100%;
     display: flex;
@@ -10,7 +10,7 @@
     align-items: center;
     flex-direction: column;
     image-rendering: pixelated;
-    background: url("../../themes/basic/back_basic.png");
+    //background: url("../../themes/basic/back_basic.png");
     background-size: 100% 100%;
 
     .home-screen-top {
@@ -25,7 +25,6 @@
             display: flex;
             align-items: center;
             padding: 0 0 0 30px;
-            background: url("../../themes/basic/top_nav_basic_n.png");
             background-repeat: no-repeat;
             background-size: 100% 100%;
             image-rendering: pixelated;
@@ -39,7 +38,6 @@
             display: flex;
             justify-content: center;
             div {
-                background: url("../../themes/basic/top_nav_basic_n.png");
                 background-repeat: no-repeat;
                 background-size: 100% 100%;
                 image-rendering: pixelated;
@@ -82,7 +80,6 @@
     }
 
     .vs-button {
-        background: url("../../themes/basic/btn_basic_wide_basic__n.png");
         width: 200px;
         display: flex;
         justify-content: center;
@@ -114,7 +111,6 @@
     .home-screen-bottom {
         position: absolute;
         bottom: 0;
-        background: url("../../themes/basic/basic_menu_bar.png");
         background-repeat: no-repeat;
         background-size: 100% 100%;
         image-rendering: pixelated;

@@ -10,7 +10,6 @@
     align-items: center;
     flex-direction: column;
     image-rendering: pixelated;
-    background: url("../../themes/basic/back_basic.png");
     background-size: 100% 100%;
     color: white;
 
@@ -62,7 +61,6 @@
     .underline {
         height: 10px;
         width: 80%;
-        background: url("../../themes/basic/line_basic.png");
         background-size: 100% 100%;
         background-position: center;
         margin-top: 10%;
@@ -80,7 +78,6 @@
             margin-top: 10%;
             width: 60%;
             height: 80%;
-            background: url("../../themes/basic/btn_basic_basic_n.png");
             background-size: 100% 100%;
             background-position: center;
             display: flex;
@@ -103,7 +100,6 @@
             margin-top: 10%;
             width: 60%;
             height: 80%;
-            background: url("../../themes/basic/btn_basic_basic_n.png");
             background-size: 100% 100%;
             background-position: center;
             display: flex;

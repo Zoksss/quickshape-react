@@ -6,7 +6,6 @@
     padding: 3vh 0;
     align-items: center;
     flex-direction: column;
-    background: url("../../themes/basic/back_basic.png");
     background-size: 100% 100%;
     image-rendering: pixelated;
     margin: 20px 0;
@@ -51,7 +50,6 @@
     width: 45%;
     background-color: aqua;
     height: 70px;
-    background: url("../../themes/basic/top_nav_basic_n.png");
     background-size: 100% 100%;
     image-rendering: -webkit-optimize-contrast;
     image-rendering: pixelated;
@@ -68,7 +66,6 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    background: url("../../themes/basic/center_field_basic_n.png");
     background-size: 100% 100%;
     image-rendering: -webkit-optimize-contrast;
     image-rendering: pixelated;
@@ -97,7 +94,6 @@
     margin-top: 15px;
     outline: none;
     aspect-ratio: 1/1;
-    background: url("../../themes/basic/btn_basic_basic_n.png");
     background-size: 100% 100%;
     image-rendering: pixelated;
     transition: 75ms all ease;
