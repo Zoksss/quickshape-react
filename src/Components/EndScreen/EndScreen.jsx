@@ -9,14 +9,17 @@ import PlayAgain from "../../Icons/play_again.png";
 
 const EndScreen = (props) => {
 
-    
+    const styleBack = { backgroundImage: `url("${props.currentTheme.backSRC}")` }
+    const styleBtn = { backgroundImage: `url("${props.currentTheme.btnSRC}")` }
+    const styleLine = { backgroundImage: `url("${props.currentTheme.lineSRC}")` }
+
     return (
-        <div className="end-screen-container" style={{ backgroundImage: `url("${props.currentTheme.backSRC}")`}}>
+        <div className="end-screen-container" style={styleBack}>
             <p className="end-screen-average-round-time-title">AVERAGE TIME</p>
             <p className="end-screen-average-round-time" id="currRoundAverage">{props.timeAvg / 1000}</p>
             <p className="end-screen-best-time-title">BEST TIME</p>
             <p className={`end-screen-best-time  ${props.isBestTime ? "colorBlink" : ""}`}>{props.bestAvg / 1000}</p>
-            <div className="underline" style={{ backgroundImage: `url("${props.currentTheme.lineSRC}")`}}></div>
+            <div className="underline" style={styleLine}></div>
             <div className="coins">
                 <img className="coin-icon" src={Coin} alt="" />
                 <p className="coin-value" id="endScreenCoins">+{props.coinsToAdd}</p>
@@ -25,13 +28,12 @@ const EndScreen = (props) => {
                 <img className="gems-icon" src={Gem} alt="" />
                 <p className="gem-value" id="endScreenGems">+{props.gemsToAdd}</p>
             </div>
-            <div className="underline" style={{ backgroundImage: `url("${props.currentTheme.lineSRC}")`}}></div>
+            <div className="underline" style={styleLine}></div>
             <div className="end-screen-buttons">
-                <button onClick={() => { props.setIsHome(true); props.setIsEnd(false) }} className="go-back" style={{ backgroundImage: `url("${props.currentTheme.btnSRC}")`}}>
+                <button onClick={() => { props.setIsHome(true); props.setIsEnd(false) }} className="go-back" style={styleBtn}>
                     <p>MENU</p>
                 </button>
-                <button className="replay" onClick={() => props.startGame()} style={{ backgroundImage: `url("${props.currentTheme.btnSRC}")`}}><img className="play-again" src={PlayAgain} alt="" /></button>
-
+                <button className="replay" onClick={() => props.startGame()} style={styleBtn}><img className="play-again" src={PlayAgain} alt="" /></button>
             </div>
         </div>
     );

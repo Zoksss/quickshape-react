@@ -11,8 +11,16 @@ class Theme {
         this.lineSRC = lineSRC;
     }
 }
-
 const themes = {
+    basic: new Theme("Basic",
+        "themes/basic/back.png",
+        "themes/basic/center.png",
+        "themes/basic/btn.png",
+        "themes/basic/btn_wide.png",
+        "themes/basic/nav.png",
+        "themes/basic/top.png",
+        "themes/basic/line.png"
+    ),
     cherry: new Theme("Cherry",
         "themes/cherry/back.png",
         "themes/cherry/center.png",
@@ -40,71 +48,51 @@ const themes = {
         "themes/dark/top.png",
         "themes/dark/line.png"
     ),
-    
+    matrix: new Theme("Matrix",
+        "themes/matrix/back.png",
+        "themes/matrix/center.png",
+        "themes/matrix/btn.png",
+        "themes/matrix/btn_wide.png",
+        "themes/matrix/nav.png",
+        "themes/matrix/top.png",
+        "themes/matrix/line.png"
+    ),
+    desert: new Theme("Desert",
+        "themes/desert/back.png",
+        "themes/desert/center.png",
+        "themes/desert/btn.png",
+        "themes/desert/btn_wide.png",
+        "themes/desert/nav.png",
+        "themes/desert/top.png",
+        "themes/desert/line.png"
+    ),
+    mountain: new Theme("Mountains",
+        "themes/mountain/back.png",
+        "themes/mountain/center.png",
+        "themes/mountain/btn.png",
+        "themes/mountain/btn_wide.png",
+        "themes/mountain/nav.png",
+        "themes/mountain/top.png",
+        "themes/mountain/line.png"
+    ),
+    dark: new Theme("Dark",
+        "themes/dark/back.png",
+        "themes/dark/center.png",
+        "themes/dark/btn.png",
+        "themes/dark/btn_wide.png",
+        "themes/dark/nav.png",
+        "themes/dark/top.png",
+        "themes/dark/line.png"
+    ),
+    japan: new Theme("Japan",
+        "themes/japan/back.png",
+        "themes/japan/center.png",
+        "themes/japan/btn.png",
+        "themes/japan/btn_wide.png",
+        "themes/japan/nav.png",
+        "themes/japan/top.png",
+        "themes/japan/line.png"
+    ),
 }
 
 export default themes;
-
-/*
-desert: new Theme("Desert",
-        "desert",
-        "themes/" + this.prefixName + "/back.png",
-        "themes/" + this.prefixName + "/center.png",
-        "themes/" + this.prefixName + "/btn.png",
-        "themes/" + this.prefixName + "/btn_wide.png",
-        "themes/" + this.prefixName + "/nav.png",
-        "themes/" + this.prefixName + "/top.png",
-        "themes/" + this.prefixName + "/line.png"
-    ),
-    mountain: new Theme("Mountains",
-        "mountain",
-        "themes/" + this.prefixName + "/back.png",
-        "themes/" + this.prefixName + "/center.png",
-        "themes/" + this.prefixName + "/btn.png",
-        "themes/" + this.prefixName + "/btn_wide.png",
-        "themes/" + this.prefixName + "/nav.png",
-        "themes/" + this.prefixName + "/top.png",
-        "themes/" + this.prefixName + "/line.png"
-    ),
-    dark: new Theme("Dark",
-        "dark",
-        "themes/" + this.prefixName + "/back.png",
-        "themes/" + this.prefixName + "/center.png",
-        "themes/" + this.prefixName + "/btn.png",
-        "themes/" + this.prefixName + "/btn_wide.png",
-        "themes/" + this.prefixName + "/nav.png",
-        "themes/" + this.prefixName + "/top.png",
-        "themes/" + this.prefixName + "/line.png"
-    ),
-    matrix: new Theme("Matrix",
-        "matrix",
-        "themes/" + this.prefixName + "/back.png",
-        "themes/" + this.prefixName + "/center.png",
-        "themes/" + this.prefixName + "/btn.png",
-        "themes/" + this.prefixName + "/btn_wide.png",
-        "themes/" + this.prefixName + "/nav.png",
-        "themes/" + this.prefixName + "/top.png",
-        "themes/" + this.prefixName + "/line.png"
-    ),
-    cherry: new Theme("Cherry",
-        "cherry",
-        "themes/" + this.prefixName + "/back.png",
-        "themes/" + this.prefixName + "/center.png",
-        "themes/" + this.prefixName + "/btn.png",
-        "themes/" + this.prefixName + "/btn_wide.png",
-        "themes/" + this.prefixName + "/nav.png",
-        "themes/" + this.prefixName + "/top.png",
-        "themes/" + this.prefixName + "/line.png"
-    ),
-    japan: new Theme("Japan",
-        "Japan",
-        "themes/" + this.prefixName + "/back.png",
-        "themes/" + this.prefixName + "/center.png",
-        "themes/" + this.prefixName + "/btn.png",
-        "themes/" + this.prefixName + "/btn_wide.png",
-        "themes/" + this.prefixName + "/nav.png",
-        "themes/" + this.prefixName + "/top.png",
-        "themes/" + this.prefixName + "/line.png"
-    ),
-
-*/

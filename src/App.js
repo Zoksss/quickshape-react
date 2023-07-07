@@ -8,8 +8,8 @@ import React from 'react';
 import calculateCoinsAndGems from "./Components/utilities/calculateCoinsAndGems.js"
 
 
-import themesData from  "../src/Components/utilities/themeData.js";
-import  buyTheme from "./Components/utilities/buyTheme.js";
+import themesData from "../src/Components/utilities/themeData.js";
+import buyTheme from "./Components/utilities/buyTheme.js";
 
 const getRndInteger = (min, max) => {  // both included
   return Math.floor(Math.random() * (max - min + 1)) + min;
@@ -45,7 +45,16 @@ const App = () => {
 
 
   const [unlockedThemes, setUnlockedThemes] = React.useState(["Basic"]);
-  const [currentTheme, setCurrentTheme] = React.useState({});
+  const [currentTheme, setCurrentTheme] = React.useState({
+    "name": "SciFi",
+    "backSRC": "themes/basic/back.png",
+    "centerSRC": "themes/basic/center.png",
+    "btnSRC": "themes/basic/btn.png",
+    "btnWideSRC": "themes/basic/btn_wide.png",
+    "navSRC": "themes/basic/nav.png",
+    "topSRC": "themes/basic/top.png",
+    "lineSRC": "themes/basic/line.png"
+  });
 
 
   const checkIsCorrect = (clickedShape) => {
@@ -55,7 +64,7 @@ const App = () => {
 
   const setTheme = (themeName) => {
     let themeObj = themesData.find(o => o.themeName === themeName);
-    if(themeObj) setCurrentTheme(themeObj.object);
+    if (themeObj) setCurrentTheme(themeObj.object);
     console.log(currentTheme);
   }
 
@@ -146,13 +155,19 @@ const App = () => {
 
   const buyThemeTemp = (themeName) => {
     console.log(themeName)
-    console.log(buyTheme(themeName, coins, gems, unlockedThemes)); 
-    setTheme("Dark");
+    let x = buyTheme(themeName, coins, gems, unlockedThemes);  // unlockedThemes, priceCoin, priceGems. themeset
+    if (x[3] === "") {
+      setUnlockedThemes(unlockedThemes)
+      setCoins(prev => prev - x[1]);
+      setGems(prev => prev - x[2]);
+    } else setTheme(x[3]);
   }
+
+
 
   return (
     <div className="App">
-      {isHome && < HomeScreen startGame={startGame} coins={coins} gems={gems} buyTheme={buyThemeTemp}  currentTheme={currentTheme}/>}
+      {isHome && < HomeScreen startGame={startGame} coins={coins} gems={gems} buyTheme={buyThemeTemp} currentTheme={currentTheme} unlockedThemes={unlockedThemes} />}
       {!isEnd && !isHome &&
         < MainGame
           shape={shape}
@@ -166,7 +181,7 @@ const App = () => {
           currentTheme={currentTheme}
         />
       }
-      {isEnd && < EndScreen timeAvg={timeAvg} bestAvg={bestAvg} isBestTime={isBestTime} startGame={startGame} setIsHome={setIsHome} setIsEnd={setIsEnd} setCoins={setCoins} setGems={setGems} coins={coins} gems={gems} coinsToAdd={coinsToAdd} gemsToAdd={gemsToAdd} currentTheme={currentTheme}/>}
+      {isEnd && < EndScreen timeAvg={timeAvg} bestAvg={bestAvg} isBestTime={isBestTime} startGame={startGame} setIsHome={setIsHome} setIsEnd={setIsEnd} setCoins={setCoins} setGems={setGems} coins={coins} gems={gems} coinsToAdd={coinsToAdd} gemsToAdd={gemsToAdd} currentTheme={currentTheme} />}
 
     </div>
   );

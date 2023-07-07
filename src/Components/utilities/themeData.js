@@ -64,7 +64,7 @@ let themesData = [
     {
         themeName: "Matrix",
         placeholder: "./assets/themes_placeholders/hacker.png",
-        object: themes.hacker,
+        object: themes.matrix,
         unlocked: false,
         price: 10,
         gems: false,

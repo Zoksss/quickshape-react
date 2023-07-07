@@ -48,7 +48,7 @@
 .time-counter,
 .round-counter {
     width: 45%;
-    background-color: aqua;
+    background-color: transparent;
     height: 70px;
     background-size: 100% 100%;
     image-rendering: -webkit-optimize-contrast;
@@ -69,6 +69,7 @@
     background-size: 100% 100%;
     image-rendering: -webkit-optimize-contrast;
     image-rendering: pixelated;
+    background-color: transparent;
 }
 
 .center-shape-image > img {
@@ -96,6 +97,7 @@
     aspect-ratio: 1/1;
     background-size: 100% 100%;
     image-rendering: pixelated;
+    background-color: transparent;
     transition: 75ms all ease;
 }
 

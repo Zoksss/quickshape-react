@@ -11,6 +11,12 @@ let shapes = [Pentagon, Circle, Triangle, Square];
 
 
 const MainGame = (props) => {
+
+    const styleBack = { backgroundImage: `url("${props.currentTheme.backSRC}")` }
+    const styleBtn = { backgroundImage: `url("${props.currentTheme.btnSRC}")` }
+    const styleTop = { backgroundImage: `url("${props.currentTheme.topSRC}")` }
+    const styleCenter = { backgroundImage: `url("${props.currentTheme.centerSRC}")` }
+
     React.useEffect(() => {
         let interval = null;
 
@@ -27,25 +33,25 @@ const MainGame = (props) => {
 
 
     return (
-        <div className="main-game-container" style={{ backgroundImage: `url("${props.currentTheme.backSRC}")` }}>
+        <div className="main-game-container" style={styleBack}>
             {props.isCountdown && <div className="main-game-countdown">
-                <p className={props.counter == 3 || props.counter == 1 ? "shake" : "shake2"}>{props.counter}</p>
+                <p className={props.counter === 3 || props.counter === 1 ? "shake" : "shake2"}>{props.counter}</p>
             </div>}
             <div className="main-game-top-row">
-                <div className="time-counter" style={{ backgroundImage: `url("${props.currentTheme.topSRC}")` }}><p>{props.time / 1000}</p></div>
-                <div className="round-counter" style={{ backgroundImage: `url("${props.currentTheme.topSRC}")` }}><p>{props.currentRound}/10</p></div>
+                <div className="time-counter" style={styleTop}><p>{props.time / 1000}</p></div>
+                <div className="round-counter" style={styleTop}><p>{props.currentRound}/10</p></div>
             </div>
-            <div className="center-shape-image" style={{ backgroundImage: `url("${props.currentTheme.centerSRC}")` }}>
+            <div className="center-shape-image" style={styleCenter}>
                 <img src={shapes[props.shape]} alt="circle" />
             </div>
             <div className="main-game-shape-buttons">
                 <div className="main-game-shape-buttons-row">
-                    <button onClick={() => props.updateGameState(0)} style={{ backgroundImage: `url("${props.currentTheme.btnSRC}")` }}><img src={Pentagon} alt="circle" /></button>
-                    <button onClick={() => props.updateGameState(1)} style={{ backgroundImage: `url("${props.currentTheme.btnSRC}")` }}><img src={Circle} alt="circle" /></button>
+                    <button onClick={() => props.updateGameState(0)} style={styleBtn}><img src={Pentagon} alt="circle" /></button>
+                    <button onClick={() => props.updateGameState(1)} style={styleBtn}><img src={Circle} alt="circle" /></button>
                 </div>
                 <div className="main-game-shape-buttons-row">
-                    <button onClick={() => props.updateGameState(2)} style={{ backgroundImage: `url("${props.currentTheme.btnSRC}")` }}><img src={Triangle} alt="circle" /></button>
-                    <button onClick={() => props.updateGameState(3)} style={{ backgroundImage: `url("${props.currentTheme.btnSRC}")` }}><img src={Square} alt="circle" /></button>
+                    <button onClick={() => props.updateGameState(2)} style={styleBtn}><img src={Triangle} alt="circle" /></button>
+                    <button onClick={() => props.updateGameState(3)} style={styleBtn}><img src={Square} alt="circle" /></button>
                 </div>
             </div>
         </div>

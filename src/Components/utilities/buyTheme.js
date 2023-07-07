@@ -2,14 +2,13 @@
 import themesData from "./themeData.js";
 
 const buyTheme = (themeName, coins, gems, unlockedThemes) => {
-    themeName = "SciFi"
     let priceGems = 0, priceCoins = 0;
     let unlockedThemesTemp = unlockedThemes;
     console.log("buying theme")
 
     let themeObj = themesData.find(o => o.themeName === themeName);
     if (themeObj) {
-        if (themeObj.unlocked) console.log("set theme")
+        if (themeObj.unlocked) return [unlockedThemes, 0, 0, themeObj.themeName];
         else {
             // buy theme logic
             if (themeObj.gems) {
@@ -30,7 +29,7 @@ const buyTheme = (themeName, coins, gems, unlockedThemes) => {
         }
     }
 
-    return [unlockedThemesTemp, priceCoins, priceGems];
+    return [unlockedThemesTemp, priceCoins, priceGems, ""];
 }
 
 export default buyTheme;
