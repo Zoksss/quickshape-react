@@ -3,7 +3,7 @@ import themes from "./themes";
 let themesData = [
     {
         themeName: "Basic",
-        placeholder: "./assets/themes_placeholders/basic.png",
+        placeholder: "themes/ShopIcons/shop_theme_basic.png",
         object: themes.basic,
         unlocked: true,
         price: 0,
@@ -13,7 +13,7 @@ let themesData = [
     },
     {
         themeName: "Desert",
-        placeholder: "./assets/themes_placeholders/desert.png",
+        placeholder: "themes/ShopIcons/shop_theme_desert.png",
         object: themes.desert,
         unlocked: false,
         price: 10,
@@ -23,7 +23,7 @@ let themesData = [
     },
     {
         themeName: "SciFi",
-        placeholder: "./assets/themes_placeholders/science.png",
+        placeholder: "themes/ShopIcons/shop_theme_scifi.png",
         object: themes.science,
         unlocked: false,
         price: 10,
@@ -33,7 +33,7 @@ let themesData = [
     },
     {
         themeName: "Easter",
-        placeholder: "./assets/themes_placeholders/easter22.png",
+        placeholder: "themes/ShopIcons/shop_theme_easter.png",
         object: themes.easter22,
         unlocked: false,
         price: 10,
@@ -43,7 +43,7 @@ let themesData = [
     },
     {
         themeName: "Mountain",
-        placeholder: "./assets/themes_placeholders/mountain.png",
+        placeholder: "themes/Icons/ShopIcons/shop_theme_mountain.png",
         object: themes.mountain,
         unlocked: false,
         price: 10,
@@ -53,7 +53,7 @@ let themesData = [
     },
     {
         themeName: "Dark",
-        placeholder: "./assets/themes_placeholders/dark.png",
+        placeholder: "themes/ShopIcons/shop_theme_dark.png",
         object: themes.dark,
         unlocked: false,
         price: 10,
@@ -63,7 +63,7 @@ let themesData = [
     },
     {
         themeName: "Matrix",
-        placeholder: "./assets/themes_placeholders/hacker.png",
+        placeholder: "themes/ShopIcons/shop_theme_matrix.png",
         object: themes.matrix,
         unlocked: false,
         price: 10,
@@ -73,7 +73,7 @@ let themesData = [
     },
     {
         themeName: "Cherry",
-        placeholder: "./assets/themes_placeholders/cherry.png",
+        placeholder: "themes/ShopIcons/shop_theme_cherry.png",
         object: themes.cherry,
         unlocked: false,
         price: 10,
@@ -83,7 +83,7 @@ let themesData = [
     },
     {
         themeName: "Japan",
-        placeholder: "./assets/themes_placeholders/japan.png",
+        placeholder: "themes/ShopIcons/shop_theme_japan.png",
         object: themes.japan,
         unlocked: false,
         price: 10,

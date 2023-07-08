@@ -167,7 +167,15 @@ const App = () => {
 
   return (
     <div className="App">
-      {isHome && < HomeScreen startGame={startGame} coins={coins} gems={gems} buyTheme={buyThemeTemp} currentTheme={currentTheme} unlockedThemes={unlockedThemes} />}
+      {isHome && < HomeScreen
+        startGame={startGame}
+        coins={coins}
+        gems={gems}
+        buyTheme={buyThemeTemp}
+        currentTheme={currentTheme}
+        unlockedThemes={unlockedThemes}
+        themesData={themesData} />}
+
       {!isEnd && !isHome &&
         < MainGame
           shape={shape}

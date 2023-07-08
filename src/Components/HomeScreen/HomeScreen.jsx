@@ -10,19 +10,9 @@ import Inventory from "../../Icons/backpack.png"
 
 import Coin from "../../Icons/coin_icon.png"
 import Gem from "../../Icons/gem.png"
-import Checkmark from "../../Icons/checkmark.png"
-
-import AlphaTheme from "../../Icons/ShopIcons/shop_theme_alpha.png"
-import ScifiTheme from "../../Icons/ShopIcons/shop_theme_scifi.png"
-import MatrixTheme from "../../Icons/ShopIcons/shop_theme_matrix.png"
-import MountainTheme from "../../Icons/ShopIcons/shop_theme_mountain.png"
-import DesertTheme from "../../Icons/ShopIcons/shop_theme_desert.png"
-import BasicTheme from "../../Icons/ShopIcons/shop_theme_basic.png"
 
 import ShopTheme from './ShopTheme';
 import InvTheme from './InvTheme';
-
-
 
 const HomeScreen = (props) => {
 
@@ -34,6 +24,7 @@ const HomeScreen = (props) => {
     const styleNav = { backgroundImage: `url("${props.currentTheme.navSRC}")` }
     const styleBtnWide = { backgroundImage: `url("${props.currentTheme.btnWideSRC}")` }
     const styleCenter = { backgroundImage: `url("${props.currentTheme.centerSRC}")` }
+ 
 
     return (
         <div className="home-screen-container" style={styleBack}>
@@ -57,7 +48,7 @@ const HomeScreen = (props) => {
                 <button className="center-shape-image shop-promo" style={styleCenter}>
                     <p className="shop-promo-title">ALPHA THEME</p>
                     <div className="promo-reward-row">
-                        <img className="promo-theme-img" src={AlphaTheme} alt="" />
+                        <img className="promo-theme-img" src={"themes/ShopIcons/shop_theme_alpha.png"} alt="" />
                         <div className="promo-reward-side">
                             <div><img className="promo-coin-img" src={Coin} alt="" />75</div>
                             <div><img className="promo-gem-img" src={Gem} alt="" />10</div>
@@ -66,22 +57,18 @@ const HomeScreen = (props) => {
                     <p className="shop-promo-desc">CLAIM FOR FREE!</p>
                 </button>
                 <div className="theme-shop-contianer">
-                    <ShopTheme price={170} img={ScifiTheme} namee={"SciFi"} buyTheme={props.buyTheme} isCheckmark={(props.unlockedThemes.filter(themeName => themeName === "SciFi")).length}/>
-                    <ShopTheme price={550} img={MatrixTheme} namee={"Matrix"} buyTheme={props.buyTheme} isCheckmark={props.unlockedThemes.filter(themeName => themeName === "Matrix").length}/>
-                    <ShopTheme price={370} img={DesertTheme} namee={"Desert"} gems={true} buyTheme={props.buyTheme} isCheckmark={props.unlockedThemes.filter(themeName => themeName === "Desert").length}/>
-                    <ShopTheme price={200} img={MountainTheme} namee={"Japan"} buyTheme={props.buyTheme} isCheckmark={props.unlockedThemes.filter(themeName => themeName === "Japan").length}/>
+                    <ShopTheme price={props.themesData.find(o=>o.themeName==="SciFi").price} img={props.themesData.find(o=>o.themeName==="SciFi").placeholder} namee={"SciFi"} buyTheme={props.buyTheme} isCheckmark={(props.unlockedThemes.filter(themeName => themeName === "SciFi")).length?true:false}/>
+                    <ShopTheme price={props.themesData.find(o=>o.themeName==="Matrix").price} img={props.themesData.find(o=>o.themeName==="Matrix").placeholder} namee={"Matrix"} buyTheme={props.buyTheme} isCheckmark={props.unlockedThemes.filter(themeName => themeName === "Matrix").length?true:false}/>
+                    <ShopTheme price={props.themesData.find(o=>o.themeName==="Desert").price} img={props.themesData.find(o=>o.themeName==="Desert").placeholder} namee={"Desert"} gems={true} buyTheme={props.buyTheme} isCheckmark={props.unlockedThemes.filter(themeName => themeName === "Desert").length?true:false}/>
+                    <ShopTheme price={props.themesData.find(o=>o.themeName==="Japan").price} img={props.themesData.find(o=>o.themeName==="Desert").placeholder} namee={"Japan"} buyTheme={props.buyTheme} isCheckmark={props.unlockedThemes.filter(themeName => themeName === "Japan").length?true:false}/>
                 </div>
             </div>}
 
             {isInv && !isShop && <div className="inv-container">
-                <p className="inv-promo-desc">THEME INVENTROY (1/34)</p>
+                <p className="inv-promo-desc">THEME INVENTROY ({props.unlockedThemes.length}/34)</p>
                 <div className="theme-inv-contianer">
-                    <InvTheme img={BasicTheme} />
-                    <InvTheme img={MatrixTheme} />
-                    <InvTheme img={DesertTheme} />
-                    <InvTheme img={ScifiTheme} />
-                    <InvTheme img={MountainTheme} />
-                    <InvTheme img={AlphaTheme} />
+                   {props.unlockedThemes.map((themeName, i) => (
+            <InvTheme img={props.themesData.find(o=>o.themeName===themeName).placeholder} themeName = {themeName} key={i} equipTheme={props.buyTheme} />))}
                 </div>
             </div>}
 

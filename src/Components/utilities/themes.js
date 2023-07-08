@@ -75,15 +75,6 @@ const themes = {
         "themes/mountain/top.png",
         "themes/mountain/line.png"
     ),
-    dark: new Theme("Dark",
-        "themes/dark/back.png",
-        "themes/dark/center.png",
-        "themes/dark/btn.png",
-        "themes/dark/btn_wide.png",
-        "themes/dark/nav.png",
-        "themes/dark/top.png",
-        "themes/dark/line.png"
-    ),
     japan: new Theme("Japan",
         "themes/japan/back.png",
         "themes/japan/center.png",
