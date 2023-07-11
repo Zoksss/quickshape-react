@@ -58,6 +58,17 @@
         }
     }
 
+    .home-wrapper{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        position: absolute;
+        left: 50%;
+        top: 40%;
+        transform: translate(-50%, -50%);
+    }
+
     .center-shape-image {
         display: flex;
         flex-direction: column;
@@ -176,6 +187,8 @@
     justify-content: center;
     align-items: center;
     flex-direction: column;
+    width: 100%;
+    z-index: 99;
     .shop-promo {
         margin: 30px 0 0 0 !important;
         height: 200px !important;
@@ -224,6 +237,8 @@
         flex-wrap: wrap;
         justify-content: center;
         margin-top: 20px;
+        width: 100%;
+        height: 100%;
         .theme-shop-button {
             position: relative;
             margin-top: 10px;
@@ -266,8 +281,14 @@
     justify-content: center;
     align-items: center;
     flex-direction: column;
+    position: absolute;
+    margin: 10vh auto;
+    width: 80%;
+    z-index: 99;
+
     .inv-promo-desc {
         color: white;
+       margin-top: 30px; 
     }
     .theme-inv-contianer {
         display: grid;
