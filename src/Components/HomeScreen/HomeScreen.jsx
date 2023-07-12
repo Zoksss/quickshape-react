@@ -16,6 +16,8 @@ import InvTheme from './InvTheme';
 
 import { useTransition, animated } from "react-spring"
 
+import themesData from "../utilities/themeData";
+
 const HomeScreen = (props) => {
 
     const [isShop, setIsShop] = React.useState(false);
@@ -28,9 +30,9 @@ const HomeScreen = (props) => {
     const styleCenter = { backgroundImage: `url("${props.currentTheme.centerSRC}")` }
 
     const transitionMain = useTransition(!isInv && !isShop, {
-        from: {  opacity: 0 },
+        from: { opacity: 0 },
         enter: { opacity: 1 },
-        leave: {  opacity: 0 },
+        leave: { opacity: 0 },
     });
     const transitionShop = useTransition(!isInv && isShop, {
         from: { x: 150, y: 0, opacity: 0 },
@@ -42,9 +44,49 @@ const HomeScreen = (props) => {
         enter: { x: 0, y: 0, opacity: 1 },
         leave: { x: -150, y: 0, opacity: 0 },
     });
+    const transitionChangeTheme = useTransition(props.isThemeChange, {
+        from: { opacity: 1 },
+        enter: { opacity: 1 },
+        leave: { opacity: 0 },
+    });
+
+    // props.unlockedThemes
+    function getRandomInt(min, max) {
+        return min + Math.floor(Math.random() * (max - min + 1));
+    }
+
+    let shopDom = [];
+    const generateShop = () => {
+        let shopThemes = [];
+        shopDom = [];
+        for (let i = 0; i < 4; i++) {
+            let num = getRandomInt(0,8);
+            shopThemes.push(themesData[num].themeName);
+        }
+        shopDom = shopThemes.map((themeName, i) => {
+            return <ShopTheme key={i} price={props.themesData.find(o => o.themeName === themeName).price} img={props.themesData.find(o => o.themeName === themeName).placeholder} namee={themeName} buyTheme={props.buyTheme} isCheckmark={(props.unlockedThemes.filter(themeName => themeName === themeName)).length ? true : false} />
+        });
+    }
+    generateShop();
+    React.useEffect(() => {
+        if (props.isThemeChange === true) {
+            console.log("chaning theme")
+            let interval = null;
+            interval = setTimeout(() => {
+                props.setIsThemeChange(false);
+            }, 1500);
+            return () => clearTimeout(interval);
+        }
+    }, [props.isThemeChange]);
+
 
     return (
         <div className="home-screen-container" style={styleBack} >
+            {transitionChangeTheme((style, item) =>
+                item ? <animated.div style={style} className="theme-change">
+                    <p>LOADING</p>
+                </animated.div> : "")}
+
             <div className="home-screen-top">
                 <div className="nickname" style={styleTop}>
                     <p>Zoks</p>
@@ -75,10 +117,7 @@ const HomeScreen = (props) => {
                         <p className="shop-promo-desc">CLAIM FOR FREE!</p>
                     </button>
                     <div className="theme-shop-contianer">
-                        <ShopTheme price={props.themesData.find(o => o.themeName === "SciFi").price} img={props.themesData.find(o => o.themeName === "SciFi").placeholder} namee={"SciFi"} buyTheme={props.buyTheme} isCheckmark={(props.unlockedThemes.filter(themeName => themeName === "SciFi")).length ? true : false} />
-                        <ShopTheme price={props.themesData.find(o => o.themeName === "Matrix").price} img={props.themesData.find(o => o.themeName === "Matrix").placeholder} namee={"Matrix"} buyTheme={props.buyTheme} isCheckmark={props.unlockedThemes.filter(themeName => themeName === "Matrix").length ? true : false} />
-                        <ShopTheme price={props.themesData.find(o => o.themeName === "Desert").price} img={props.themesData.find(o => o.themeName === "Desert").placeholder} namee={"Desert"} gems={true} buyTheme={props.buyTheme} isCheckmark={props.unlockedThemes.filter(themeName => themeName === "Desert").length ? true : false} />
-                        <ShopTheme price={props.themesData.find(o => o.themeName === "Japan").price} img={props.themesData.find(o => o.themeName === "Desert").placeholder} namee={"Japan"} buyTheme={props.buyTheme} isCheckmark={props.unlockedThemes.filter(themeName => themeName === "Japan").length ? true : false} />
+                        {shopDom}
                     </div>
                 </animated.div> : ""
             )}
@@ -108,7 +147,7 @@ const HomeScreen = (props) => {
                 </animated.div> : ""
             )}
             <div className="home-screen-bottom" style={styleNav}>
-                <button onClick={() => { setIsShop(true); setIsInv(false) }} className={`home-shop-button ${isShop ? "active" : ""}`}><img src={Shop} alt="shop" /></button>
+                <button onClick={() => { setIsShop(true); setIsInv(false); }} className={`home-shop-button ${isShop ? "active" : ""}`}><img src={Shop} alt="shop" /></button>
                 <button onClick={() => { setIsShop(false); setIsInv(false); }} className={`home-play-button ${!isShop && !isInv ? "active" : ""}`}><img src={Main} alt="shop" /></button>
                 <button onClick={() => { setIsShop(false); setIsInv(true) }} className={`home-inventory-button ${isInv ? "active" : ""}`}><img src={Inventory} alt="shop" /></button>
             </div>

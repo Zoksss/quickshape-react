@@ -33,7 +33,7 @@ let themesData = [
     },
     {
         themeName: "Easter",
-        placeholder: "themes/ShopIcons/shop_theme_easter.png",
+        placeholder: "themes/ShopIcons/shop_theme_mountain.png",
         object: themes.easter22,
         unlocked: false,
         price: 10,
@@ -43,7 +43,7 @@ let themesData = [
     },
     {
         themeName: "Mountain",
-        placeholder: "themes/Icons/ShopIcons/shop_theme_mountain.png",
+        placeholder: "themes/ShopIcons/shop_theme_mountain.png",
         object: themes.mountain,
         unlocked: false,
         price: 10,

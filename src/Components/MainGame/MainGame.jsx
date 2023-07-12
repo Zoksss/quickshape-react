@@ -9,7 +9,6 @@ import Pentagon from "../../shapes/pentagon_pix.png";
 
 let shapes = [Pentagon, Circle, Triangle, Square];
 
-
 const MainGame = (props) => {
 
     const styleBack = { backgroundImage: `url("${props.currentTheme.backSRC}")` }

@@ -43,6 +43,7 @@ const App = () => {
 
   const [counter, setCounter] = React.useState(4);
 
+  const [isThemeChange, setIsThemeChange] = React.useState(false);
 
   const [unlockedThemes, setUnlockedThemes] = React.useState(["Basic"]);
   const [currentTheme, setCurrentTheme] = React.useState({
@@ -63,6 +64,7 @@ const App = () => {
   }
 
   const setTheme = (themeName) => {
+    setIsThemeChange(true);
     let themeObj = themesData.find(o => o.themeName === themeName);
     if (themeObj) setCurrentTheme(themeObj.object);
     console.log(currentTheme);
@@ -174,6 +176,8 @@ const App = () => {
         buyTheme={buyThemeTemp}
         currentTheme={currentTheme}
         unlockedThemes={unlockedThemes}
+        isThemeChange={isThemeChange}
+        setIsThemeChange={setIsThemeChange}
         themesData={themesData} />}
 
       {!isEnd && !isHome &&
@@ -189,8 +193,21 @@ const App = () => {
           currentTheme={currentTheme}
         />
       }
-      {isEnd && < EndScreen timeAvg={timeAvg} bestAvg={bestAvg} isBestTime={isBestTime} startGame={startGame} setIsHome={setIsHome} setIsEnd={setIsEnd} setCoins={setCoins} setGems={setGems} coins={coins} gems={gems} coinsToAdd={coinsToAdd} gemsToAdd={gemsToAdd} currentTheme={currentTheme} />}
-
+      {isEnd &&
+        < EndScreen
+          timeAvg={timeAvg}
+          bestAvg={bestAvg}
+          isBestTime={isBestTime}
+          startGame={startGame}
+          setIsHome={setIsHome}
+          setIsEnd={setIsEnd}
+          setCoins={setCoins}
+          setGems={setGems}
+          coins={coins}
+          gems={gems}
+          coinsToAdd={coinsToAdd}
+          gemsToAdd={gemsToAdd}
+          currentTheme={currentTheme} />}
     </div>
   );
 }
