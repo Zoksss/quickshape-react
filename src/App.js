@@ -45,7 +45,7 @@ const App = () => {
 
   const [isThemeChange, setIsThemeChange] = React.useState(false);
 
-  const [unlockedThemes, setUnlockedThemes] = React.useState(["Basic"]);
+  const [unlockedThemes, setUnlockedThemes] = React.useState(["Basic", "Cherry" ,"Cherry", "Cherry", "Cherry"]);
   const [currentTheme, setCurrentTheme] = React.useState({
     "name": "SciFi",
     "backSRC": "themes/basic/back.png",

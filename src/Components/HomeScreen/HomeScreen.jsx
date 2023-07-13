@@ -60,7 +60,7 @@ const HomeScreen = (props) => {
         let shopThemes = [];
         shopDom = [];
         for (let i = 0; i < 4; i++) {
-            let num = getRandomInt(0,8);
+            let num = getRandomInt(0, 8);
             shopThemes.push(themesData[num].themeName);
         }
         shopDom = shopThemes.map((themeName, i) => {
@@ -106,7 +106,6 @@ const HomeScreen = (props) => {
             {transitionShop((style, item) =>
                 item ? <animated.div style={style} className="shop-container" >
                     <button className="center-shape-image shop-promo" style={styleCenter}>
-                        <p className="shop-promo-title">ALPHA THEME</p>
                         <div className="promo-reward-row">
                             <img className="promo-theme-img" src={"themes/ShopIcons/shop_theme_alpha.png"} alt="" />
                             <div className="promo-reward-side">
