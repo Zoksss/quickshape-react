@@ -23,6 +23,8 @@ const HomeScreen = (props) => {
     const [isShop, setIsShop] = React.useState(false);
     const [isInv, setIsInv] = React.useState(false);
 
+    const [isShopGenerated, setIsShopGenerated] = React.useState(false);
+
     const styleBack = { backgroundImage: `url("${props.currentTheme.backSRC}")` }
     const styleTop = { backgroundImage: `url("${props.currentTheme.topSRC}")` }
     const styleNav = { backgroundImage: `url("${props.currentTheme.navSRC}")` }
@@ -57,17 +59,28 @@ const HomeScreen = (props) => {
 
     let shopDom = [];
     const generateShop = () => {
+        console.log("sss")
+        let usedNums = [];
         let shopThemes = [];
         shopDom = [];
         for (let i = 0; i < 4; i++) {
-            let num = getRandomInt(0, 8);
-            shopThemes.push(themesData[num].themeName);
+            while (true) {
+                let num = getRandomInt(0, 8);
+                if (usedNums.filter(numE => numE === num).length > 0) { continue }
+                else {
+                    shopThemes.push(themesData[num].themeName);
+                    usedNums.push(num);
+                    break;
+                }
+            }
         }
         shopDom = shopThemes.map((themeName, i) => {
-            return <ShopTheme key={i} price={props.themesData.find(o => o.themeName === themeName).price} img={props.themesData.find(o => o.themeName === themeName).placeholder} namee={themeName} buyTheme={props.buyTheme} isCheckmark={(props.unlockedThemes.filter(themeName => themeName === themeName)).length ? true : false} />
+            return <ShopTheme key={i} price={props.themesData.find(o => o.themeName === themeName).price} img={props.themesData.find(o => o.themeName === themeName).placeholder} namee={themeName} buyTheme={props.buyTheme} isCheckmark={(props.unlockedThemes.filter(themeNamee => themeNamee === themeName)).length > 0 ? true : false} />
         });
     }
-    generateShop();
+
+        generateShop();
+
     React.useEffect(() => {
         if (props.isThemeChange === true) {
             console.log("chaning theme")
@@ -78,6 +91,7 @@ const HomeScreen = (props) => {
             return () => clearTimeout(interval);
         }
     }, [props.isThemeChange]);
+
 
 
     return (
@@ -105,7 +119,7 @@ const HomeScreen = (props) => {
 
             {transitionShop((style, item) =>
                 item ? <animated.div style={style} className="shop-container" >
-                    <button className="center-shape-image shop-promo" style={styleCenter}>
+                    {/*<button className="center-shape-image shop-promo" style={styleCenter}>
                         <div className="promo-reward-row">
                             <img className="promo-theme-img" src={"themes/ShopIcons/shop_theme_alpha.png"} alt="" />
                             <div className="promo-reward-side">
@@ -115,6 +129,7 @@ const HomeScreen = (props) => {
                         </div>
                         <p className="shop-promo-desc">CLAIM FOR FREE!</p>
                     </button>
+                    */}
                     <div className="theme-shop-contianer">
                         {shopDom}
                     </div>
