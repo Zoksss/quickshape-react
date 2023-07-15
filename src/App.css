@@ -11,4 +11,5 @@
     height: 100vh;
     overflow: hidden;
     font-family: joystix_monospace;
+    position: relative;
 }

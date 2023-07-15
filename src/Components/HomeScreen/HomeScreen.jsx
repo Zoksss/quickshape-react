@@ -103,7 +103,7 @@ const HomeScreen = (props) => {
 
             <div className="home-screen-top">
                 <div className="nickname" style={styleTop}>
-                    <p>Zoks</p>
+                    <p>{props.nickname}</p>
                 </div>
                 <div className="top-row2">
                     <div className="coins" style={styleTop}>

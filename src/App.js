@@ -1,4 +1,5 @@
 import './App.css';
+import NicknameEnter from './Components/NicknameEnter/NicknameEnter';
 import HomeScreen from './Components/HomeScreen/HomeScreen';
 import MainGame from './Components/MainGame/MainGame';
 import EndScreen from './Components/EndScreen/EndScreen';
@@ -37,6 +38,7 @@ const App = () => {
 
   const [coins, setCoins] = React.useState(0);
   const [gems, setGems] = React.useState(0);
+  const [nickname, setNickname] = React.useState("");
 
   const [coinsToAdd, setCoinsToAdd] = React.useState(0);
   const [gemsToAdd, setGemsToAdd] = React.useState(0);
@@ -169,6 +171,7 @@ const App = () => {
 
   return (
     <div className="App">
+      {nickname === "" && <NicknameEnter setNickname={setNickname} />}
       {isHome && < HomeScreen
         startGame={startGame}
         coins={coins}
@@ -178,7 +181,8 @@ const App = () => {
         unlockedThemes={unlockedThemes}
         isThemeChange={isThemeChange}
         setIsThemeChange={setIsThemeChange}
-        themesData={themesData} />}
+        themesData={themesData} 
+        nickname={nickname}/>}
 
       {!isEnd && !isHome &&
         < MainGame
