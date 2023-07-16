@@ -38,7 +38,12 @@ const App = () => {
 
   const [coins, setCoins] = React.useState(0);
   const [gems, setGems] = React.useState(0);
-  const [nickname, setNickname] = React.useState("");
+  const [nickname, setNickname] = React.useState(() => {
+    // getting stored value
+    const saved = localStorage.getItem("local-data");
+    const initialValue = JSON.parse(saved);
+    return initialValue&&initialValue.nickname || "";
+  });
 
   const [coinsToAdd, setCoinsToAdd] = React.useState(0);
   const [gemsToAdd, setGemsToAdd] = React.useState(0);
@@ -58,6 +63,11 @@ const App = () => {
     "topSRC": "themes/basic/top.png",
     "lineSRC": "themes/basic/line.png"
   });
+
+  React.useEffect(() => {
+    // storing input name
+    localStorage.setItem("local-data", JSON.stringify({nickname: nickname, unlockedThemes: unlockedThemes, coins: coins, gems:gems, bestAvg:bestAvg}));
+  }, [nickname, unlockedThemes, coins, gems, bestAvg]);
 
 
   const checkIsCorrect = (clickedShape) => {
@@ -181,8 +191,8 @@ const App = () => {
         unlockedThemes={unlockedThemes}
         isThemeChange={isThemeChange}
         setIsThemeChange={setIsThemeChange}
-        themesData={themesData} 
-        nickname={nickname}/>}
+        themesData={themesData}
+        nickname={nickname} />}
 
       {!isEnd && !isHome &&
         < MainGame
