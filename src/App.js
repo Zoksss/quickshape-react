@@ -19,13 +19,15 @@ const getRndInteger = (min, max) => {  // both included
 let previousShape = -1;
 let tempTimeArray = [];
 
+const saved = localStorage.getItem("local-data");
+const savedInitalValue = JSON.parse(saved);
 
 const App = () => {
   const [shape, setShape] = React.useState("");
   const [currentRound, setCurrentRound] = React.useState(-1);
 
   const [time, setTime] = React.useState(0);
-  const [bestAvg, setBestAvg] = React.useState(9999);
+  const [bestAvg, setBestAvg] = React.useState((savedInitalValue && savedInitalValue.bestAvg) || 999);
   const [isBestTime, setIsBestTime] = React.useState(false);
 
   const [timerOn, setTimerOn] = React.useState(false);
@@ -36,14 +38,9 @@ const App = () => {
   const [isEnd, setIsEnd] = React.useState(false);
   const [isHome, setIsHome] = React.useState(true);
 
-  const [coins, setCoins] = React.useState(0);
-  const [gems, setGems] = React.useState(0);
-  const [nickname, setNickname] = React.useState(() => {
-    // getting stored value
-    const saved = localStorage.getItem("local-data");
-    const initialValue = JSON.parse(saved);
-    return initialValue&&initialValue.nickname || "";
-  });
+  const [coins, setCoins] = React.useState((savedInitalValue && savedInitalValue.coins) || 0);
+  const [gems, setGems] = React.useState((savedInitalValue && savedInitalValue.gems) || 0);
+  const [nickname, setNickname] = React.useState((savedInitalValue && savedInitalValue.nickname) || "");
 
   const [coinsToAdd, setCoinsToAdd] = React.useState(0);
   const [gemsToAdd, setGemsToAdd] = React.useState(0);
@@ -52,7 +49,7 @@ const App = () => {
 
   const [isThemeChange, setIsThemeChange] = React.useState(false);
 
-  const [unlockedThemes, setUnlockedThemes] = React.useState(["Basic"]);
+  const [unlockedThemes, setUnlockedThemes] = React.useState((savedInitalValue && savedInitalValue.unlockedThemes) || ["Basic"]);
   const [currentTheme, setCurrentTheme] = React.useState({
     "name": "SciFi",
     "backSRC": "themes/basic/back.png",
@@ -66,7 +63,7 @@ const App = () => {
 
   React.useEffect(() => {
     // storing input name
-    localStorage.setItem("local-data", JSON.stringify({nickname: nickname, unlockedThemes: unlockedThemes, coins: coins, gems:gems, bestAvg:bestAvg}));
+    localStorage.setItem("local-data", JSON.stringify({ nickname: nickname, unlockedThemes: unlockedThemes, coins: coins, gems: gems, bestAvg: bestAvg }));
   }, [nickname, unlockedThemes, coins, gems, bestAvg]);
 
 

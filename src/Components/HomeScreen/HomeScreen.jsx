@@ -23,7 +23,7 @@ const HomeScreen = (props) => {
     const [isShop, setIsShop] = React.useState(false);
     const [isInv, setIsInv] = React.useState(false);
 
-    const [isShopGenerated, setIsShopGenerated] = React.useState(false);
+    //const [isShopGenerated, setIsShopGenerated] = React.useState(false);
 
     const styleBack = { backgroundImage: `url("${props.currentTheme.backSRC}")` }
     const styleTop = { backgroundImage: `url("${props.currentTheme.topSRC}")` }
@@ -59,7 +59,6 @@ const HomeScreen = (props) => {
 
     let shopDom = [];
     const generateShop = () => {
-        console.log("sss")
         let usedNums = [];
         let shopThemes = [];
         shopDom = [];
