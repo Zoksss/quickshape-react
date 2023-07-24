@@ -1,8 +1,10 @@
+import io from "socket.io-client";
 import './App.css';
 import NicknameEnter from './Components/NicknameEnter/NicknameEnter';
 import HomeScreen from './Components/HomeScreen/HomeScreen';
 import MainGame from './Components/MainGame/MainGame';
 import EndScreen from './Components/EndScreen/EndScreen';
+import VSScreen from "./Components/VSScreen/VSScreen";
 
 import React from 'react';
 
@@ -11,6 +13,8 @@ import calculateCoinsAndGems from "./Components/utilities/calculateCoinsAndGems.
 
 import themesData from "../src/Components/utilities/themeData.js";
 import buyTheme from "./Components/utilities/buyTheme.js";
+
+var socket = io.connect('http://localhost:3001');
 
 const getRndInteger = (min, max) => {  // both included
   return Math.floor(Math.random() * (max - min + 1)) + min;
@@ -37,6 +41,7 @@ const App = () => {
 
   const [isEnd, setIsEnd] = React.useState(false);
   const [isHome, setIsHome] = React.useState(true);
+  const [isVs, setIsVs] = React.useState(true);
 
   const [coins, setCoins] = React.useState((savedInitalValue && savedInitalValue.coins) || 0);
   const [gems, setGems] = React.useState((savedInitalValue && savedInitalValue.gems) || 0);
@@ -78,7 +83,7 @@ const App = () => {
     if (themeObj) setCurrentTheme(themeObj.object);
     console.log(currentTheme);
   }
-
+  
   const startGame = () => {
     generateNewGame();
     setTime(0);
@@ -179,7 +184,7 @@ const App = () => {
   return (
     <div className="App">
       {nickname === "" && <NicknameEnter setNickname={setNickname} />}
-      {isHome && < HomeScreen
+      {isHome && !isVs && < HomeScreen
         startGame={startGame}
         coins={coins}
         gems={gems}
@@ -191,7 +196,8 @@ const App = () => {
         themesData={themesData}
         nickname={nickname} />}
 
-      {!isEnd && !isHome &&
+      {isVs && <VSScreen />}
+      {!isEnd && !isHome && !isVs && 
         < MainGame
           shape={shape}
           currentRound={currentRound}
