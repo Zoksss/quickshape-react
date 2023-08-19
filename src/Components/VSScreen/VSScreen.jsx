@@ -10,13 +10,13 @@ const VSScreen = (props) => {
         <div className="vs-screen">
             <div className="vs-screen-player-row">
                 <img src={Triangle} alt="" />
-                <p>ZORAN (YOU)</p>
+                <p>{props.nickname} (YOU)</p>
             </div>
             <div className="vs-screen-player-row">
                 <img src={Pentagon} alt="" />
-                <p>SEARCHING...</p>
+                <p>{props.oponentNickname !== "" ? props.oponentNickname : "SEARCHING..."}</p>
             </div>
-            <button className="vs-screen-cancel">CANCEL</button>
+            <button className="vs-screen-cancel" onClick={() => { props.setIsVs(false) }}>CANCEL</button>
         </div>
     );
 }

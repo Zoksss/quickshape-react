@@ -39,9 +39,17 @@ const App = () => {
 
   const [isCountdown, setIsCountdown] = React.useState(false);
 
-  const [isEnd, setIsEnd] = React.useState(false);
-  const [isHome, setIsHome] = React.useState(true);
-  const [isVs, setIsVs] = React.useState(true);
+  const [isEnd, setIsEnd] = React.useState(true); //false
+  const [isHome, setIsHome] = React.useState(false); // true
+  const [isVs, setIsVs] = React.useState(false);
+
+
+  //mp
+  const [isMultiplayerActive, setIsMultiplayerActive] = React.useState(false);
+  const [oponentNickname, setOponentNickname] = React.useState("");
+  const [opponentAvgState, setOpponentAvgState] = React.useState(9999);
+  //
+
 
   const [coins, setCoins] = React.useState((savedInitalValue && savedInitalValue.coins) || 0);
   const [gems, setGems] = React.useState((savedInitalValue && savedInitalValue.gems) || 0);
@@ -53,6 +61,7 @@ const App = () => {
   const [counter, setCounter] = React.useState(4);
 
   const [isThemeChange, setIsThemeChange] = React.useState(false);
+
 
   const [unlockedThemes, setUnlockedThemes] = React.useState((savedInitalValue && savedInitalValue.unlockedThemes) || ["Basic"]);
   const [currentTheme, setCurrentTheme] = React.useState({
@@ -72,6 +81,7 @@ const App = () => {
   }, [nickname, unlockedThemes, coins, gems, bestAvg]);
 
 
+
   const checkIsCorrect = (clickedShape) => {
     if (clickedShape === previousShape) console.log("correct");
     else console.log("wrong");
@@ -83,7 +93,7 @@ const App = () => {
     if (themeObj) setCurrentTheme(themeObj.object);
     console.log(currentTheme);
   }
-  
+
   const startGame = () => {
     generateNewGame();
     setTime(0);
@@ -180,6 +190,37 @@ const App = () => {
   }
 
 
+  React.useEffect(() => {
+    if (isVs) {
+      console.log("searching");
+      socket.emit("updateNickname", nickname);
+      socket.emit("startJoining");
+    }
+    else if (!isVs) {
+      //socket.emit("cancelSearch");
+    }
+  },
+    [isVs])
+
+  React.useEffect(() => {
+    socket.emit("averageSend", timeAvg)
+  },
+    [timeAvg])
+
+  socket.on("startGame", (nicknamesArray) => {
+    let x = 0
+    if (x === 0) {
+      setOponentNickname(nicknamesArray[1]);
+      setIsMultiplayerActive(true);
+     setIsVs(false)
+      startGame();
+    }
+    x++;
+  })
+  socket.on("averageShare", (opponentAvg) => {
+    console.log(opponentAvg)
+    setOpponentAvgState(opponentAvg);
+  })
 
   return (
     <div className="App">
@@ -194,10 +235,12 @@ const App = () => {
         isThemeChange={isThemeChange}
         setIsThemeChange={setIsThemeChange}
         themesData={themesData}
-        nickname={nickname} />}
+        nickname={nickname}
+        setIsVs={setIsVs}
+      />}
 
-      {isVs && <VSScreen />}
-      {!isEnd && !isHome && !isVs && 
+      {isVs && <VSScreen setIsVs={setIsVs} nickname={nickname} oponentNickname={oponentNickname} />}
+      {!isEnd && !isHome && !isVs &&
         < MainGame
           shape={shape}
           currentRound={currentRound}
@@ -208,6 +251,7 @@ const App = () => {
           counter={counter}
           isCountdown={isCountdown}
           currentTheme={currentTheme}
+          oponentNickname={oponentNickname}
         />
       }
       {isEnd &&
@@ -224,7 +268,11 @@ const App = () => {
           gems={gems}
           coinsToAdd={coinsToAdd}
           gemsToAdd={gemsToAdd}
-          currentTheme={currentTheme} />}
+          currentTheme={currentTheme}
+          isMultiplayerActive={isMultiplayerActive}
+          oponentNickname={oponentNickname}
+          opponentAvgState={opponentAvgState}
+        />}
     </div>
   );
 }

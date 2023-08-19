@@ -17,8 +17,16 @@ const EndScreen = (props) => {
         <div className="end-screen-container" style={styleBack}>
             <p className="end-screen-average-round-time-title">AVERAGE TIME</p>
             <p className="end-screen-average-round-time" id="currRoundAverage">{props.timeAvg / 1000}</p>
-            <p className="end-screen-best-time-title">BEST TIME</p>
-            <p className={`end-screen-best-time  ${props.isBestTime ? "colorBlink" : ""}`}>{props.bestAvg / 1000}</p>
+            {!props.isMultiplayerActive && <>
+                <p className="end-screen-best-time-title">BEST TIME</p>
+                <p className={`end-screen-best-time  ${props.isBestTime ? "colorBlink" : ""}`}>{props.bestAvg / 1000}</p>
+            </>
+            }
+            {props.isMultiplayerActive && <>
+                <p className="end-screen-best-time-title">{props.oponentNickname}</p>
+                <p className={`end-screen-best-time`}>{props.opponentAvgState/1000}</p>
+            </>
+            }
             <div className="underline" style={styleLine}></div>
             <div className="coins">
                 <img className="coin-icon" src={Coin} alt="" />

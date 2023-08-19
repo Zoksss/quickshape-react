@@ -78,8 +78,6 @@ const HomeScreen = (props) => {
         });
     }
 
-        generateShop();
-
     React.useEffect(() => {
         if (props.isThemeChange === true) {
             console.log("chaning theme")
@@ -91,7 +89,7 @@ const HomeScreen = (props) => {
         }
     }, [props.isThemeChange]);
 
-
+    generateShop();
 
     return (
         <div className="home-screen-container" style={styleBack} >
@@ -153,16 +151,16 @@ const HomeScreen = (props) => {
                         <img src={Triangle} alt="circle" />
                         <p>PLAY</p>
                     </button>
-                    <button className="vs-button" style={styleBtnWide}>
+                    <button className="vs-button" style={styleBtnWide} onClick={() => {props.setIsVs(true); props.searchForVs()}}>
                         <img src={Pentagon} alt="circle" />
                         <p>VS</p>
                     </button>
                 </animated.div> : ""
             )}
             <div className="home-screen-bottom" style={styleNav}>
-                <button onClick={() => { setIsShop(true); setIsInv(false); }} className={`home-shop-button ${isShop ? "active" : ""}`}><img src={Shop} alt="shop" /></button>
+                <button onClick={() => { setIsShop(true); setIsInv(false);}} className={`home-shop-button ${isShop ? "active" : ""}`}><img src={Shop} alt="shop" /></button>
                 <button onClick={() => { setIsShop(false); setIsInv(false); }} className={`home-play-button ${!isShop && !isInv ? "active" : ""}`}><img src={Main} alt="shop" /></button>
-                <button onClick={() => { setIsShop(false); setIsInv(true) }} className={`home-inventory-button ${isInv ? "active" : ""}`}><img src={Inventory} alt="shop" /></button>
+                <button onClick={() => { setIsShop(false); setIsInv(true);}} className={`home-inventory-button ${isInv ? "active" : ""}`}><img src={Inventory} alt="shop" /></button>
             </div>
         </div >
     );
