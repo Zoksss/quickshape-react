@@ -23,8 +23,8 @@ const EndScreen = (props) => {
             </>
             }
             {props.isMultiplayerActive && <>
-                <p className="end-screen-best-time-title">{props.oponentNickname}</p>
-                <p className={`end-screen-best-time`}>{props.opponentAvgState/1000}</p>
+                <p className="end-screen-best-time-title">{props.oponentNicknameState}</p>
+                <p className={`end-screen-best-time`}>{(props.opponentAvgState===9999)?"Waiting...":(props.opponentAvgState / 1000)}</p>
             </>
             }
             <div className="underline" style={styleLine}></div>
@@ -38,10 +38,10 @@ const EndScreen = (props) => {
             </div>
             <div className="underline" style={styleLine}></div>
             <div className="end-screen-buttons">
-                <button onClick={() => { props.setIsHome(true); props.setIsEnd(false) }} className="go-back" style={styleBtn}>
+                <button onClick={() => { props.setIsHome(true); props.setIsEnd(false); props.setOponentNicknameState("")}} className="go-back" style={styleBtn}>
                     <p>MENU</p>
                 </button>
-                <button className="replay" onClick={() => props.startGame()} style={styleBtn}><img className="play-again" src={PlayAgain} alt="" /></button>
+                <button className="replay" onClick={() => { props.setOponentNicknameState(""); props.startGame() }} style={styleBtn}><img className="play-again" src={PlayAgain} alt="" /></button>
             </div>
         </div>
     );

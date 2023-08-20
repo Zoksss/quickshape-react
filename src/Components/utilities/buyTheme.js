@@ -8,20 +8,18 @@ const buyTheme = (themeName, coins, gems, unlockedThemes) => {
 
     let themeObj = themesData.find(o => o.themeName === themeName);
     if (themeObj) {
-        if (themeObj.unlocked) return [unlockedThemes, 0, 0, themeObj.themeName];
+        if (unlockedThemes.filter(theme => theme ===themeName).length) return [unlockedThemes, 0, 0, themeObj.themeName];
         else {
             // buy theme logic
             if (themeObj.gems) {
                 if (gems >= themeObj.price) {
                     priceGems = parseInt(themeObj.price);
-                    themeObj.unlocked = true;
                     unlockedThemesTemp.push(themeObj.themeName)
                     //saveData();
                 }
             } else {
                 if (coins >= themeObj.price) {
                     priceCoins = parseInt(themeObj.price);
-                    themeObj.unlocked = true;
                     unlockedThemesTemp.push(themeObj.themeName)
                     //saveData();
                 }

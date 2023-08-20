@@ -46,7 +46,7 @@ const App = () => {
 
   //mp
   const [isMultiplayerActive, setIsMultiplayerActive] = React.useState(false);
-  const [oponentNickname, setOponentNickname] = React.useState("");
+  const [oponentNicknameState, setOponentNicknameState] = React.useState("");
   const [opponentAvgState, setOpponentAvgState] = React.useState(9999);
   //
 
@@ -64,7 +64,7 @@ const App = () => {
 
 
   const [unlockedThemes, setUnlockedThemes] = React.useState((savedInitalValue && savedInitalValue.unlockedThemes) || ["Basic"]);
-  const [currentTheme, setCurrentTheme] = React.useState({
+  const [currentTheme, setCurrentTheme] = React.useState((savedInitalValue && savedInitalValue.currentTheme) || { 
     "name": "SciFi",
     "backSRC": "themes/basic/back.png",
     "centerSRC": "themes/basic/center.png",
@@ -77,8 +77,8 @@ const App = () => {
 
   React.useEffect(() => {
     // storing input name
-    localStorage.setItem("local-data", JSON.stringify({ nickname: nickname, unlockedThemes: unlockedThemes, coins: coins, gems: gems, bestAvg: bestAvg }));
-  }, [nickname, unlockedThemes, coins, gems, bestAvg]);
+    localStorage.setItem("local-data", JSON.stringify({ nickname: nickname, unlockedThemes: unlockedThemes, coins: coins, gems: gems, bestAvg: bestAvg, currentTheme:currentTheme }));
+  }, [nickname, unlockedThemes, coins, gems, bestAvg, currentTheme]);
 
 
 
@@ -95,6 +95,7 @@ const App = () => {
   }
 
   const startGame = () => {
+    setOpponentAvgState(9999)
     generateNewGame();
     setTime(0);
     setCurrentRound(0)
@@ -189,15 +190,11 @@ const App = () => {
     } else setTheme(x[3]);
   }
 
-
   React.useEffect(() => {
     if (isVs) {
       console.log("searching");
       socket.emit("updateNickname", nickname);
       socket.emit("startJoining");
-    }
-    else if (!isVs) {
-      //socket.emit("cancelSearch");
     }
   },
     [isVs])
@@ -207,19 +204,25 @@ const App = () => {
   },
     [timeAvg])
 
-  socket.on("startGame", (nicknamesArray) => {
+
+  socket.on("startGame", (nicknames) => {
     let x = 0
     if (x === 0) {
-      setOponentNickname(nicknamesArray[1]);
-      setIsMultiplayerActive(true);
-     setIsVs(false)
-      startGame();
+      setOponentNicknameState(nicknames.player === nickname ? nicknames.leader : nicknames.player);
+      // set wait
+      let timeout = null;
+      timeout = setTimeout(() => {
+        setIsMultiplayerActive(true);
+        setIsVs(false)
+        startGame();
+      }, 3000);
+      return () => clearTimeout(timeout);
     }
     x++;
   })
   socket.on("averageShare", (opponentAvg) => {
-    console.log(opponentAvg)
-    setOpponentAvgState(opponentAvg);
+    console.log("avg is: " + opponentAvg.socketNickname + " / " + opponentAvg.time)
+    if (opponentAvg.socketNickname !== nickname) setOpponentAvgState(opponentAvg.time);
   })
 
   return (
@@ -239,7 +242,15 @@ const App = () => {
         setIsVs={setIsVs}
       />}
 
-      {isVs && <VSScreen setIsVs={setIsVs} nickname={nickname} oponentNickname={oponentNickname} />}
+      {isVs && <VSScreen
+        setIsVs={setIsVs}
+        nickname={nickname}
+        oponentNicknameState={oponentNicknameState}
+        currentTheme={currentTheme}
+        isMultiplayerActive={isMultiplayerActive}
+        cancelSearch={() => socket.emit("cancelSearch")}
+      />}
+
       {!isEnd && !isHome && !isVs &&
         < MainGame
           shape={shape}
@@ -251,7 +262,8 @@ const App = () => {
           counter={counter}
           isCountdown={isCountdown}
           currentTheme={currentTheme}
-          oponentNickname={oponentNickname}
+          oponentNicknameState={oponentNicknameState}
+
         />
       }
       {isEnd &&
@@ -270,8 +282,9 @@ const App = () => {
           gemsToAdd={gemsToAdd}
           currentTheme={currentTheme}
           isMultiplayerActive={isMultiplayerActive}
-          oponentNickname={oponentNickname}
+          oponentNicknameState={oponentNicknameState}
           opponentAvgState={opponentAvgState}
+          setOponentNicknameState={setOponentNicknameState}
         />}
     </div>
   );

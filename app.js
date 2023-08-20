@@ -9,10 +9,10 @@ app.use(cors());
 const server = http.createServer(app);
 
 const io = new Server(server, {
-  cors: {
-    origin: "http://localhost:3000",
-    methods: ["GET", "POST"],
-  },
+    cors: {
+        origin: "http://localhost:3000",
+        methods: ["GET", "POST"],
+    },
 });
 
 class Room {
@@ -48,7 +48,7 @@ io.on("connection", (socket) => {
             rooms[room.leader].playerNickname = socket.nickname;
             console.log("joined");
             console.table(rooms[room.leader]);
-            io.in(room.leader).emit("startGame", [rooms[room.leader].leaderNickname, rooms[room.leader].playerNickname]);
+            io.in(room.leader).emit("startGame", { leader: rooms[room.leader].leaderNickname, player: rooms[room.leader].playerNickname });
         } else {
             // create new room
             rooms[socket.id] = new Room(socket.id);
@@ -67,7 +67,8 @@ io.on("connection", (socket) => {
     socket.on("averageSend", time => {
         let room = searchForRoomWhereUser(socket.id);
         if (room) {
-            socket.to(room.leader).emit("averageShare", time);
+            io.in(room.leader).emit("averageShare", {time:time, socketNickname:socket.nickname});
+            console.log(socket.nickname + " / " + time)
         }
     });
 });
@@ -96,4 +97,4 @@ const searchForRoomWhereUser = (sockeid) => {
 
 server.listen(3001, () => {
     console.log("SERVER IS RUNNING");
-  });
+});
