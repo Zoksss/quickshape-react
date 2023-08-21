@@ -21,7 +21,7 @@ const getRndInteger = (min, max) => {  // both included
 }
 
 let previousShape = -1;
-let tempTimeArray = [];
+let tempTimeArray = [320];
 
 const saved = localStorage.getItem("local-data");
 const savedInitalValue = JSON.parse(saved);
@@ -39,9 +39,12 @@ const App = () => {
 
   const [isCountdown, setIsCountdown] = React.useState(false);
 
-  const [isEnd, setIsEnd] = React.useState(true); //false
-  const [isHome, setIsHome] = React.useState(false); // true
-  const [isVs, setIsVs] = React.useState(false);
+  const [isEnd, setIsEnd] = React.useState(false); //false
+  const [isHome, setIsHome] = React.useState(true); // true
+  const [isVs, setIsVs] = React.useState(false); 
+
+
+  const [isWrong, setIsWrong] = React.useState(false);
 
 
   //mp
@@ -64,7 +67,7 @@ const App = () => {
 
 
   const [unlockedThemes, setUnlockedThemes] = React.useState((savedInitalValue && savedInitalValue.unlockedThemes) || ["Basic"]);
-  const [currentTheme, setCurrentTheme] = React.useState((savedInitalValue && savedInitalValue.currentTheme) || { 
+  const [currentTheme, setCurrentTheme] = React.useState((savedInitalValue && savedInitalValue.currentTheme) || {
     "name": "SciFi",
     "backSRC": "themes/basic/back.png",
     "centerSRC": "themes/basic/center.png",
@@ -77,14 +80,13 @@ const App = () => {
 
   React.useEffect(() => {
     // storing input name
-    localStorage.setItem("local-data", JSON.stringify({ nickname: nickname, unlockedThemes: unlockedThemes, coins: coins, gems: gems, bestAvg: bestAvg, currentTheme:currentTheme }));
+    localStorage.setItem("local-data", JSON.stringify({ nickname: nickname, unlockedThemes: unlockedThemes, coins: coins, gems: gems, bestAvg: bestAvg, currentTheme: currentTheme }));
   }, [nickname, unlockedThemes, coins, gems, bestAvg, currentTheme]);
 
 
-
   const checkIsCorrect = (clickedShape) => {
-    if (clickedShape === previousShape) console.log("correct");
-    else console.log("wrong");
+    if (clickedShape === previousShape) return true;
+    else return false;
   }
 
   const setTheme = (themeName) => {
@@ -95,6 +97,7 @@ const App = () => {
   }
 
   const startGame = () => {
+    setIsWrong(false)
     setOpponentAvgState(9999)
     generateNewGame();
     setTime(0);
@@ -148,12 +151,17 @@ const App = () => {
         setIsBestTime(true);
       }
       else setIsBestTime(false);
-      calclulateStats();
+      calclulateStats(x);
 
       tempTimeArray = [];
     }
+    if (currentRound >= 0) {
+      let isCorr = checkIsCorrect(clickedShape);
+      if(!isCorr) setIsWrong(true);
+      tempTimeArray.push(time + (isCorr ? 0 : 1000));
+    }
+    setTime(0);
 
-    checkIsCorrect(clickedShape);
     setCurrentRound(prevRound => prevRound + 1)
     let newShape = getRndInteger(0, 3);
     if (newShape !== previousShape) {
@@ -165,15 +173,10 @@ const App = () => {
       previousShape = newShape;
       setShape(newShape);
     }
-
-    if (currentRound >= 0) {
-      tempTimeArray.push(time);
-    }
-    setTime(0);
   }
 
-  const calclulateStats = () => {
-    let stats = calculateCoinsAndGems(timeAvg);
+  const calclulateStats = (xTimeAvg) => {
+    let stats = calculateCoinsAndGems(xTimeAvg);
     setCoins(coins + stats[0]);
     setGems(gems + stats[1])
     setCoinsToAdd(stats[0]);
@@ -221,7 +224,6 @@ const App = () => {
     x++;
   })
   socket.on("averageShare", (opponentAvg) => {
-    console.log("avg is: " + opponentAvg.socketNickname + " / " + opponentAvg.time)
     if (opponentAvg.socketNickname !== nickname) setOpponentAvgState(opponentAvg.time);
   })
 
@@ -263,6 +265,8 @@ const App = () => {
           isCountdown={isCountdown}
           currentTheme={currentTheme}
           oponentNicknameState={oponentNicknameState}
+          isWrong={isWrong}
+          setIsWrong={setIsWrong}
 
         />
       }

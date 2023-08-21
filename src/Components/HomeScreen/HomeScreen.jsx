@@ -75,7 +75,14 @@ const HomeScreen = (props) => {
             }
         }
         shopDom = shopThemes.map((themeName, i) => {
-            return <ShopTheme key={i} price={props.themesData.find(o => o.themeName === themeName).price} img={props.themesData.find(o => o.themeName === themeName).placeholder} namee={themeName} buyTheme={props.buyTheme} isCheckmark={(props.unlockedThemes.filter(themeNamee => themeNamee === themeName)).length > 0 ? true : false} />
+            return <ShopTheme
+                key={i}
+                price={props.themesData.find(o => o.themeName === themeName).price}
+                img={props.themesData.find(o => o.themeName === themeName).placeholder}
+                namee={themeName} buyTheme={props.buyTheme}
+                isCheckmark={(props.unlockedThemes.filter(themeNamee => themeNamee === themeName)).length > 0 ? true : false}
+                gems={props.themesData.find(o => o.themeName === themeName).gems}
+            />
         })
     };
 

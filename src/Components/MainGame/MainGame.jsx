@@ -30,9 +30,23 @@ const MainGame = (props) => {
         return () => clearInterval(interval);
     }, [props.timerOn]);
 
+    React.useEffect(() => {
+        let timeout = null;
+
+        if (props.timerOn)
+            timeout = setTimeout(() => {
+                props.setIsWrong(false);
+            }, 80);
+        else {
+            clearTimeout(timeout);
+            // stops timer
+        }
+        return () => clearInterval(timeout);
+    }, [props.isWrong])
 
     return (
         <div className="main-game-container" style={styleBack}>
+            <div className={`main-game-wrong-shape ${props.isWrong && "main-game-wrong-shape-show"}`}><p>+1</p></div>
             {props.isCountdown && <div className="main-game-countdown">
                 <p className={props.counter === 3 || props.counter === 1 ? "shake" : "shake2"}>{props.counter}</p>
             </div>}

@@ -1,7 +1,7 @@
 const calculateCoinsAndGems = (timeAvg) => {
   let coins = 0
   let gems = 0;
-
+  console.log(timeAvg)
   if (!isNaN(timeAvg)) {
     if (timeAvg >= 0 && timeAvg <= 100) {
       coins = 83;
