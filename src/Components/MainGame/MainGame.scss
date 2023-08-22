@@ -70,6 +70,22 @@
     position: relative;
     font-size: 30px;
     text-align: center;
+    position: relative;
+
+    .plus-1{
+        position: absolute;
+        bottom: -60px;
+        left: 30px;
+        color: red;
+        font-size: 35px;
+        transition: 200ms all ease;
+        display: none;
+    }
+    .plus-1-transformation{
+        display: block;
+        animation: move 200ms ease;
+        
+    }
 }
 .time-counter,
 .round-counter {
@@ -189,4 +205,19 @@
 
 .shake2 {
     animation: shake2 500ms ease;
+}
+
+
+
+
+@keyframes move {
+    0% {
+        left: 30px;
+        bottom: -60px;
+
+    }
+    100% {
+        bottom: -30px;
+        left: 45px;
+    }
 }

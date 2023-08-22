@@ -36,7 +36,7 @@ const MainGame = (props) => {
         if (props.timerOn)
             timeout = setTimeout(() => {
                 props.setIsWrong(false);
-            }, 80);
+            }, 100);
         else {
             clearTimeout(timeout);
             // stops timer
@@ -46,13 +46,14 @@ const MainGame = (props) => {
 
     return (
         <div className="main-game-container" style={styleBack}>
-            <div className={`main-game-wrong-shape ${props.isWrong && "main-game-wrong-shape-show"}`}><p>+1</p></div>
+            <div className={`main-game-wrong-shape ${props.isWrong && "main-game-wrong-shape-show"}`}></div>
             {props.isCountdown && <div className="main-game-countdown">
                 <p className={props.counter === 3 || props.counter === 1 ? "shake" : "shake2"}>{props.counter}</p>
             </div>}
             <div className="main-game-top-row">
                 <div className="time-counter" style={styleTop}><p>{props.time / 1000}</p></div>
                 <div className="round-counter" style={styleTop}><p>{props.currentRound}/10</p></div>
+                <p className={`plus-1 ${props.isWrong && "plus-1-transformation"}`}>+1</p>
             </div>
             <div className="center-shape-image" style={styleCenter}>
                 <img src={shapes[props.shape]} alt="circle" />

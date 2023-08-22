@@ -135,6 +135,7 @@ const HomeScreen = (props) => {
                         <p className="shop-promo-desc">CLAIM FOR FREE!</p>
                     </button>
                     */}
+                    <p className="your-shop-title">YOUR SHOP</p>
                     <div className="theme-shop-contianer">
                         {shopDom}
                     </div>
