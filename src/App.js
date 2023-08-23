@@ -47,6 +47,10 @@ const App = () => {
   const [isWrong, setIsWrong] = React.useState(false);
 
 
+  const [isShopGenerated, setIsShopGenerated] = React.useState(false);
+
+
+
   //mp
   const [isMultiplayerActive, setIsMultiplayerActive] = React.useState(false);
   const [oponentNicknameState, setOponentNicknameState] = React.useState("");
@@ -242,6 +246,8 @@ const App = () => {
         themesData={themesData}
         nickname={nickname}
         setIsVs={setIsVs}
+        isShopGenerated={isShopGenerated}
+        setIsShopGenerated={setIsShopGenerated}
       />}
 
       {isVs && <VSScreen

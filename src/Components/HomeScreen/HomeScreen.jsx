@@ -18,11 +18,14 @@ import { useTransition, animated } from "react-spring"
 
 import themesData from "../utilities/themeData";
 
+
+let shopThemes = [];
+
 const HomeScreen = (props) => {
 
     const [isShop, setIsShop] = React.useState(false);
     const [isInv, setIsInv] = React.useState(false);
-    const [isShopGenerated, setIsShopGenerated] = React.useState(false);
+    //const [isShopGenerated, setIsShopGenerated] = React.useState(false);
 
     //const [isShopGenerated, setIsShopGenerated] = React.useState(false);
 
@@ -61,16 +64,18 @@ const HomeScreen = (props) => {
     let shopDom = [];
     const generateShop = () => {
         let usedNums = [];
-        let shopThemes = [];
-        shopDom = [];
-        for (let i = 0; i < 4; i++) {
-            while (true) {
-                let num = getRandomInt(0, 8);
-                if (usedNums.filter(numE => numE === num).length > 0) { continue }
-                else {
-                    shopThemes.push(themesData[num].themeName);
-                    usedNums.push(num);
-                    break;
+        if (!props.isShopGenerated) {
+            shopThemes = [];
+            shopDom = [];
+            for (let i = 0; i < 4; i++) {
+                while (true) {
+                    let num = getRandomInt(0, 8);
+                    if (usedNums.filter(numE => numE === num).length > 0) { continue }
+                    else {
+                        shopThemes.push(themesData[num].themeName);
+                        usedNums.push(num);
+                        break;
+                    }
                 }
             }
         }
@@ -84,6 +89,7 @@ const HomeScreen = (props) => {
                 gems={props.themesData.find(o => o.themeName === themeName).gems}
             />
         })
+        props.setIsShopGenerated(true)
     };
 
 
