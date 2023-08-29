@@ -68,3 +68,4 @@ It features Singleplayer, Multiplayer, Currency, Shop and Inventory system.
 [stars-url]: https://github.com/Zoksss/quickshape-react/stargazers
 [issues-shield]: https://img.shields.io/github/issues/othneildrew/Best-README-Template.svg?style=for-the-badge
 [issues-url]: https://github.com/Zoksss/quickshape-react/issues
+[product-screenshot]: /public/quickshapess.png
