@@ -29,11 +29,11 @@ const HomeScreen = (props) => {
 
     //const [isShopGenerated, setIsShopGenerated] = React.useState(false);
 
-    const styleBack = { backgroundImage: `url("${props.currentTheme.backSRC}")` }
-    const styleTop = { backgroundImage: `url("${props.currentTheme.topSRC}")` }
-    const styleNav = { backgroundImage: `url("${props.currentTheme.navSRC}")` }
-    const styleBtnWide = { backgroundImage: `url("${props.currentTheme.btnWideSRC}")` }
-    const styleCenter = { backgroundImage: `url("${props.currentTheme.centerSRC}")` }
+    const styleBack = { backgroundImage: `url(${process.env.PUBLIC_URL+"/"+props.currentTheme.backSRC})` }
+    const styleTop = { backgroundImage: `url("${process.env.PUBLIC_URL+"/"+props.currentTheme.topSRC}")` }
+    const styleNav = { backgroundImage: `url("${process.env.PUBLIC_URL+"/"+props.currentTheme.navSRC}")` }
+    const styleBtnWide = { backgroundImage: `url("${process.env.PUBLIC_URL+"/"+props.currentTheme.btnWideSRC}")` }
+    const styleCenter = { backgroundImage: `url("${process.env.PUBLIC_URL+"/"+props.currentTheme.centerSRC}")` }
 
     const transitionMain = useTransition(!isInv && !isShop, {
         from: { opacity: 0 },

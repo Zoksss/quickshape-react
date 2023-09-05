@@ -10,11 +10,11 @@ import Pentagon from "../../shapes/pentagon_pix.png";
 let shapes = [Pentagon, Circle, Triangle, Square];
 
 const MainGame = (props) => {
-
-    const styleBack = { backgroundImage: `url("${props.currentTheme.backSRC}")` }
-    const styleBtn = { backgroundImage: `url("${props.currentTheme.btnSRC}")` }
-    const styleTop = { backgroundImage: `url("${props.currentTheme.topSRC}")` }
-    const styleCenter = { backgroundImage: `url("${props.currentTheme.centerSRC}")` }
+    
+    const styleBack = { backgroundImage: `url(${process.env.PUBLIC_URL+"/"+props.currentTheme.backSRC})` }
+    const styleTop = { backgroundImage: `url("${process.env.PUBLIC_URL+"/"+props.currentTheme.topSRC}")` }
+    const styleBtn = { backgroundImage: `url("${process.env.PUBLIC_URL+"/"+props.currentTheme.btnSRC}")` }
+    const styleCenter = { backgroundImage: `url("${process.env.PUBLIC_URL+"/"+props.currentTheme.centerSRC}")` }
 
     React.useEffect(() => {
         let interval = null;

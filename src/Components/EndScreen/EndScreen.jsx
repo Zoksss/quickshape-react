@@ -9,9 +9,9 @@ import PlayAgain from "../../Icons/play_again.png";
 
 const EndScreen = (props) => {
 
-    const styleBack = { backgroundImage: `url("${props.currentTheme.backSRC}")` }
-    const styleBtn = { backgroundImage: `url("${props.currentTheme.btnSRC}")` }
-    const styleLine = { backgroundImage: `url("${props.currentTheme.lineSRC}")` }
+    const styleBack = { backgroundImage: `url(${process.env.PUBLIC_URL+"/"+props.currentTheme.backSRC})` }
+    const styleBtn = { backgroundImage: `url("${process.env.PUBLIC_URL+"/"+props.currentTheme.btnSRC}")` }
+    const styleLine = { backgroundImage: `url("${process.env.PUBLIC_URL+"/"+props.currentTheme.lineSRC}")` }
 
     return (
         <div className="end-screen-container" style={styleBack}>
