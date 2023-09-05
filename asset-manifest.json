@@ -1,16 +1,16 @@
 {
   "files": {
-    "main.css": "/static/css/main.aee8ef52.css",
-    "main.js": "/static/js/main.2b5045bc.js",
-    "static/media/play_again.png": "/static/media/play_again.a84a91ee108523f00e7b.png",
-    "static/media/joystix_monospace-webfont.woff": "/static/media/joystix_monospace-webfont.1a3d5d3d8e6faecc39d2.woff",
-    "static/media/back.png": "/static/media/back.3fcab042bafc766867cd.png",
-    "index.html": "/index.html",
-    "main.aee8ef52.css.map": "/static/css/main.aee8ef52.css.map",
-    "main.2b5045bc.js.map": "/static/js/main.2b5045bc.js.map"
+    "main.css": "./static/css/main.79e68d02.css",
+    "main.js": "./static/js/main.fdada2a1.js",
+    "static/media/play_again.png": "./static/media/play_again.a84a91ee108523f00e7b.png",
+    "static/media/joystix_monospace-webfont.woff": "./static/media/joystix_monospace-webfont.1a3d5d3d8e6faecc39d2.woff",
+    "static/media/back.png": "./static/media/back.3fcab042bafc766867cd.png",
+    "index.html": "./index.html",
+    "main.79e68d02.css.map": "./static/css/main.79e68d02.css.map",
+    "main.fdada2a1.js.map": "./static/js/main.fdada2a1.js.map"
   },
   "entrypoints": [
-    "static/css/main.aee8ef52.css",
-    "static/js/main.2b5045bc.js"
+    "static/css/main.79e68d02.css",
+    "static/js/main.fdada2a1.js"
   ]
 }
