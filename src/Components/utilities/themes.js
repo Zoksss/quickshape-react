@@ -49,13 +49,13 @@ const themes = {
         "themes/dark/line.png"
     ),
     matrix: new Theme("Matrix",
-        '/themes/matrix/back.png',
-        '/themes/matrix/center.png',
-        '/themes/matrix/btn.png',
-        '/themes/matrix/btn_wide.png',
-        '/themes/matrix/nav.png',
-        '/themes/matrix/top.png',
-        '/themes/matrix/line.png'
+        "themes/matrix/back.png",
+        "themes/matrix/center.png",
+        "themes/matrix/btn.png",
+        "themes/matrix/btn_wide.png",
+        "themes/matrix/nav.png",
+        "themes/matrix/top.png",
+        "themes/matrix/line.png"
     ),
     desert: new Theme("Desert",
         "themes/desert/back.png",
@@ -67,13 +67,13 @@ const themes = {
         "themes/desert/line.png"
     ),
     mountain: new Theme("Mountains",
-        "/themes/mountain/back.png",
-        "/themes/mountain/center.png",
-        "/themes/mountain/btn.png",
-        "/themes/mountain/btn_wide.png",
-        "/themes/mountain/nav.png",
-        "/themes/mountain/top.png",
-        "/themes/mountain/line.png"
+        "themes/mountain/back.png",
+        "themes/mountain/center.png",
+        "themes/mountain/btn.png",
+        "themes/mountain/btn_wide.png",
+        "themes/mountain/nav.png",
+        "themes/mountain/top.png",
+        "themes/mountain/line.png"
     ),
     japan: new Theme("Japan",
         "themes/japan/back.png",
