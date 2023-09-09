@@ -25,7 +25,7 @@
   <p align="center">
     Shape Reflex Game
     <br />
-    <a href="https://">View Demo</a>
+    <a href="https://zoksss.github.io/quickshape-react/">View Demo</a>
     ·
     <a href="https://github.com/Zoksss/quickshape-react/issues">Report Bug</a>
   </p>
@@ -36,7 +36,7 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-[![Product Name Screen Shot][product-screenshot]](https://quickshape.onrender.com)
+[![Product Name Screen Shot][product-screenshot]](https://zoksss.github.io/quickshape-react/)
 
 
 Quickshape is simple game where you need to click displayed shape as fast as possible and to have fastest time possible.
